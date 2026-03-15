@@ -1,0 +1,82 @@
+"use client"
+
+import { useState, useMemo } from "react"
+import { motion, AnimatePresence } from "framer-motion"
+import { properties, PropertyType } from "@/lib/properties"
+import { PropertyCard } from "@/components/property-card"
+import { PropertyFilter } from "@/components/property-filter"
+
+export function PropertyShowcase() {
+  const [activeFilter, setActiveFilter] = useState<PropertyType | "All">("All")
+
+  const filteredProperties = useMemo(() => {
+    if (activeFilter === "All") return properties
+    return properties.filter((property) => property.type === activeFilter)
+  }, [activeFilter])
+
+  return (
+    <section id="properties" className="bg-secondary py-20 lg:py-28">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="mx-auto max-w-2xl text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <p className="mb-3 text-sm font-medium uppercase tracking-[0.2em] text-gold">
+              Our Portfolio
+            </p>
+            <h2 className="text-balance text-3xl font-semibold text-foreground sm:text-4xl">
+              Exceptional Properties
+            </h2>
+            <p className="mt-4 text-pretty text-muted-foreground">
+              Discover our curated selection of Los Angeles&apos; finest residences,
+              each chosen for its exceptional quality and unique character.
+            </p>
+          </motion.div>
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mt-10"
+        >
+          <PropertyFilter
+            activeFilter={activeFilter}
+            onFilterChange={setActiveFilter}
+          />
+        </motion.div>
+
+        <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <AnimatePresence mode="popLayout">
+            {filteredProperties.map((property, index) => (
+              <motion.div
+                key={property.id}
+                layout
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.3 }}
+              >
+                <PropertyCard property={property} index={index} />
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </div>
+
+        {filteredProperties.length === 0 && (
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="mt-12 text-center text-muted-foreground"
+          >
+            No properties found for this category.
+          </motion.p>
+        )}
+      </div>
+    </section>
+  )
+}
