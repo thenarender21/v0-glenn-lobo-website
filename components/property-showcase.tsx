@@ -2,17 +2,21 @@
 
 import { useState, useMemo } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { properties, PropertyType } from "@/lib/properties"
+import { properties, PropertyType, PropertyStatus } from "@/lib/properties"
 import { PropertyCard } from "@/components/property-card"
 import { PropertyFilter } from "@/components/property-filter"
 
 export function PropertyShowcase() {
-  const [activeFilter, setActiveFilter] = useState<PropertyType | "All">("All")
+  const [activeTypeFilter, setActiveTypeFilter] = useState<PropertyType | "All">("All")
+  const [activeStatusFilter, setActiveStatusFilter] = useState<PropertyStatus | "All">("All")
 
   const filteredProperties = useMemo(() => {
-    if (activeFilter === "All") return properties
-    return properties.filter((property) => property.type === activeFilter)
-  }, [activeFilter])
+    return properties.filter((property) => {
+      const passesType = activeTypeFilter === "All" || property.type === activeTypeFilter
+      const passesStatus = activeStatusFilter === "All" || property.status === activeStatusFilter
+      return passesType && passesStatus
+    })
+  }, [activeTypeFilter, activeStatusFilter])
 
   return (
     <section id="properties" className="bg-secondary py-20 lg:py-28">
@@ -31,8 +35,8 @@ export function PropertyShowcase() {
               Exceptional Properties
             </h2>
             <p className="mt-4 text-pretty text-muted-foreground">
-              Discover our curated selection of Los Angeles&apos; finest residences,
-              each chosen for its exceptional quality and unique character.
+              Discover our curated selection of Thane&apos;s finest residences,
+              each chosen for its exceptional quality along Ghodbunder Road.
             </p>
           </motion.div>
         </div>
@@ -45,8 +49,10 @@ export function PropertyShowcase() {
           className="mt-10"
         >
           <PropertyFilter
-            activeFilter={activeFilter}
-            onFilterChange={setActiveFilter}
+            activeTypeFilter={activeTypeFilter}
+            onTypeFilterChange={setActiveTypeFilter}
+            activeStatusFilter={activeStatusFilter}
+            onStatusFilterChange={setActiveStatusFilter}
           />
         </motion.div>
 

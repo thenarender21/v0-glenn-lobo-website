@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X } from "lucide-react"
+import Link from "next/link"
 import { useScrollDirection } from "@/hooks/use-scroll-direction"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
@@ -12,10 +13,10 @@ interface NavigationProps {
 }
 
 const navItems = [
-  { label: "Home", href: "#home" },
-  { label: "Properties", href: "#properties" },
-  { label: "About", href: "#about" },
-  { label: "Testimonials", href: "#testimonials" },
+  { label: "Home", href: "/" },
+  { label: "Properties", href: "/properties" },
+  { label: "About", href: "/#about" },
+  { label: "Testimonials", href: "/#testimonials" },
 ]
 
 export function Navigation({ onOpenContact }: NavigationProps) {
@@ -36,18 +37,18 @@ export function Navigation({ onOpenContact }: NavigationProps) {
         )}
       >
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
-          <a href="#home" className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2">
             <span className={cn(
               "text-xl font-semibold tracking-tight transition-colors",
               isAtTop ? "text-white" : "text-foreground"
             )}>
-              Glenn Lobo
+              Thakurjee Properties
             </span>
-          </a>
+          </Link>
 
           <div className="hidden md:flex md:items-center md:gap-8">
             {navItems.map((item) => (
-              <a
+              <Link
                 key={item.label}
                 href={item.href}
                 className={cn(
@@ -56,7 +57,7 @@ export function Navigation({ onOpenContact }: NavigationProps) {
                 )}
               >
                 {item.label}
-              </a>
+              </Link>
             ))}
             <Button
               onClick={onOpenContact}
@@ -104,7 +105,7 @@ export function Navigation({ onOpenContact }: NavigationProps) {
             >
               <div className="flex items-center justify-between">
                 <span className="text-xl font-semibold tracking-tight text-foreground">
-                  Glenn Lobo
+                  Thakurjee Properties
                 </span>
                 <button
                   type="button"
@@ -117,14 +118,14 @@ export function Navigation({ onOpenContact }: NavigationProps) {
               </div>
               <div className="mt-8 flex flex-col gap-6">
                 {navItems.map((item) => (
-                  <a
+                  <Link
                     key={item.label}
                     href={item.href}
                     onClick={() => setMobileMenuOpen(false)}
                     className="text-lg font-medium text-foreground/80 hover:text-foreground transition-colors"
                   >
                     {item.label}
-                  </a>
+                  </Link>
                 ))}
                 <Button
                   onClick={() => {

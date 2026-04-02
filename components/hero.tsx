@@ -38,9 +38,9 @@ export function Hero({ onOpenContact }: HeroProps) {
             <span className="font-medium">Discerning Clients</span>
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-pretty text-lg text-white/80 sm:text-xl">
-            Experience personalized service and access to Los Angeles&apos; most
-            prestigious addresses with Glenn Lobo, your trusted luxury real
-            estate advisor.
+            Experience personalized service and access to Thane&apos;s most
+            prestigious addresses on Ghodbunder Road with Thakurjee Properties, your trusted real
+            estate partner.
           </p>
         </motion.div>
 

@@ -14,13 +14,13 @@ export function Footer({ onOpenContact }: FooterProps) {
       <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8 lg:py-16">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-2">
-            <h3 className="text-xl font-semibold text-foreground">Glenn Lobo</h3>
+            <h3 className="text-xl font-semibold text-foreground">Thakurjee Properties</h3>
             <p className="mt-2 text-sm text-muted-foreground">
-              Luxury Real Estate Specialist
+              Leading Real Estate Experts
             </p>
             <p className="mt-4 max-w-md text-sm leading-relaxed text-foreground/70">
-              Dedicated to providing exceptional service and access to Los
-              Angeles&apos; most prestigious properties. Your dream home awaits.
+              Dedicated to providing exceptional service and access to Thane&apos;s
+              most prestigious properties. Your dream home awaits.
             </p>
           </div>
 
@@ -71,15 +71,15 @@ export function Footer({ onOpenContact }: FooterProps) {
             <ul className="mt-4 space-y-3">
               <li className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Phone className="size-4 text-gold" />
-                <span>+1 (310) 555-0199</span>
+                <span>+91 98765 43210</span>
               </li>
               <li className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Mail className="size-4 text-gold" />
-                <span>glenn@glennlobo.com</span>
+                <span>contact@thakurjeeproperties.com</span>
               </li>
               <li className="flex items-start gap-2 text-sm text-muted-foreground">
                 <MapPin className="mt-0.5 size-4 shrink-0 text-gold" />
-                <span>9000 Wilshire Blvd, Beverly Hills, CA 90212</span>
+                <span>Thakurjee Properties, Ghodbunder Road, Thane 400607</span>
               </li>
             </ul>
           </div>
@@ -87,7 +87,7 @@ export function Footer({ onOpenContact }: FooterProps) {
 
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 md:flex-row">
           <p className="text-sm text-muted-foreground">
-            {currentYear} Glenn Lobo Real Estate. All rights reserved.
+            &copy; {currentYear} Thakurjee Properties. All rights reserved.
           </p>
           <div className="flex gap-6">
             <a

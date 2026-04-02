@@ -30,16 +30,26 @@ export function PropertyCard({ property, index }: PropertyCardProps) {
           className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-charcoal/60 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-        <span
-          className={cn(
-            "absolute top-4 left-4 rounded-sm px-3 py-1 text-xs font-medium uppercase tracking-wider",
-            property.type === "Modern" && "bg-charcoal text-white",
-            property.type === "Heritage" && "bg-gold text-charcoal",
-            property.type === "Coastal" && "bg-white text-charcoal"
-          )}
-        >
-          {property.type}
-        </span>
+        <div className="absolute top-4 left-4 flex gap-2">
+          <span
+            className={cn(
+              "rounded-sm px-3 py-1 text-xs font-medium uppercase tracking-wider",
+              property.type === "1 BHK" && "bg-white text-charcoal",
+              property.type === "2 BHK" && "bg-gold text-charcoal",
+              property.type === "3 BHK" && "bg-charcoal text-white"
+            )}
+          >
+            {property.type}
+          </span>
+          <span
+            className={cn(
+              "rounded-sm px-3 py-1 text-xs font-medium uppercase tracking-wider",
+              property.status === "Rent" ? "bg-blue-500 text-white" : "bg-emerald-500 text-white"
+            )}
+          >
+            For {property.status}
+          </span>
+        </div>
       </div>
 
       <div className="p-5">

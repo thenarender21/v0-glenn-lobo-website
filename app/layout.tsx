@@ -7,8 +7,8 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Glenn Lobo | Luxury Real Estate',
-  description: 'Experience personalized service and access to Los Angeles\' most prestigious addresses with Glenn Lobo, your trusted luxury real estate advisor.',
+  title: 'Thakurjee Properties | Real Estate in Thane',
+  description: 'Experience personalized service and access to Thane\'s most prestigious addresses with Thakurjee Properties, your trusted real estate partner.',
   generator: 'v0.app',
   icons: {
     icon: [

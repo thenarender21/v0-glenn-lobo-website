@@ -13,40 +13,43 @@ export function AgentSection({ onOpenContact }: AgentSectionProps) {
   return (
     <section id="about" className="bg-background py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="relative"
-          >
-            <div className="relative aspect-[4/5] overflow-hidden rounded-lg">
-              <Image
-                src={agentInfo.image}
-                alt={agentInfo.name}
-                fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover"
-              />
-            </div>
-            <div className="absolute -bottom-6 -right-6 hidden rounded-lg bg-gold p-6 lg:block">
-              <div className="text-center">
-                <p className="text-3xl font-bold text-charcoal">
-                  {agentInfo.stats[2].value}
-                </p>
-                <p className="text-sm font-medium text-charcoal/80">
-                  {agentInfo.stats[2].label}
-                </p>
+        <div className={agentInfo.image ? "grid items-center gap-12 lg:grid-cols-2 lg:gap-16" : "max-w-3xl mx-auto text-center"}>
+          {agentInfo.image && (
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="relative"
+            >
+              <div className="relative aspect-[4/5] overflow-hidden rounded-lg">
+                <Image
+                  src={agentInfo.image}
+                  alt={agentInfo.name}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
+                />
               </div>
-            </div>
-          </motion.div>
+              <div className="absolute -bottom-6 -right-6 hidden rounded-lg bg-gold p-6 lg:block">
+                <div className="text-center">
+                  <p className="text-3xl font-bold text-charcoal">
+                    {agentInfo.stats[2].value}
+                  </p>
+                  <p className="text-sm font-medium text-charcoal/80">
+                    {agentInfo.stats[2].label}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          )}
 
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
+            className={agentInfo.image ? "" : "flex flex-col items-center"}
           >
             <p className="mb-3 text-sm font-medium uppercase tracking-[0.2em] text-gold">
               Your Trusted Advisor
@@ -62,7 +65,7 @@ export function AgentSection({ onOpenContact }: AgentSectionProps) {
               {agentInfo.bio}
             </p>
 
-            <div className="mt-8 grid grid-cols-3 gap-6 border-y border-border py-8">
+            <div className="mt-8 grid w-full grid-cols-3 gap-6 border-y border-border py-8">
               {agentInfo.stats.map((stat, index) => (
                 <div key={index} className="text-center">
                   <p className="text-2xl font-bold text-gold sm:text-3xl">
