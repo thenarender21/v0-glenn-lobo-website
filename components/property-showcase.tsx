@@ -2,21 +2,29 @@
 
 import { useState, useMemo } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import Link from "next/link"
 import { properties, PropertyType, PropertyStatus } from "@/lib/properties"
 import { PropertyCard } from "@/components/property-card"
 import { PropertyFilter } from "@/components/property-filter"
+import { Button } from "@/components/ui/button"
 
-export function PropertyShowcase() {
+interface PropertyShowcaseProps {
+  limit?: number
+}
+
+export function PropertyShowcase({ limit }: PropertyShowcaseProps) {
   const [activeTypeFilter, setActiveTypeFilter] = useState<PropertyType | "All">("All")
   const [activeStatusFilter, setActiveStatusFilter] = useState<PropertyStatus | "All">("All")
 
   const filteredProperties = useMemo(() => {
-    return properties.filter((property) => {
+    const filtered = properties.filter((property) => {
       const passesType = activeTypeFilter === "All" || property.type === activeTypeFilter
       const passesStatus = activeStatusFilter === "All" || property.status === activeStatusFilter
       return passesType && passesStatus
     })
-  }, [activeTypeFilter, activeStatusFilter])
+    
+    return limit ? filtered.slice(0, limit) : filtered
+  }, [activeTypeFilter, activeStatusFilter, limit])
 
   return (
     <section id="properties" className="bg-secondary py-20 lg:py-28">
@@ -29,7 +37,7 @@ export function PropertyShowcase() {
             transition={{ duration: 0.6 }}
           >
             <p className="mb-3 text-sm font-medium uppercase tracking-[0.2em] text-gold">
-              Our Portfolio
+              {limit ? "Featured Portfolio" : "Our Portfolio"}
             </p>
             <h2 className="text-balance text-3xl font-semibold text-foreground sm:text-4xl">
               Exceptional Properties
@@ -81,6 +89,24 @@ export function PropertyShowcase() {
           >
             No properties found for this category.
           </motion.p>
+        )}
+
+        {limit && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="mt-16 flex justify-center"
+          >
+            <Button
+              asChild
+              size="lg"
+              className="bg-gold text-charcoal hover:bg-gold-light px-8 py-6 text-base font-medium"
+            >
+              <Link href="/properties">View All Properties</Link>
+            </Button>
+          </motion.div>
         )}
       </div>
     </section>

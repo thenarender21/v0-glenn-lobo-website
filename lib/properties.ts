@@ -15,86 +15,75 @@ export interface Property {
   sqft: number
 }
 
-export const properties: Property[] = [
-  {
-    id: "1",
-    title: "Hiranandani Estate Prime View",
-    type: "3 BHK",
-    status: "Sell",
-    price: "₹3.5 Crores",
-    location: "Ghodbunder Road, Thane",
-    image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&q=80",
-    description: "A premium 3 BHK apartment with stunning views of the Yeoor Hills and modern luxury amenities.",
-    beds: 3,
-    baths: 3,
-    sqft: 1500,
-  },
-  {
-    id: "2",
-    title: "Lodha Splendora Comfort",
-    type: "2 BHK",
-    status: "Rent",
-    price: "₹45,000 / month",
-    location: "Ghodbunder Road, Thane",
-    image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80",
-    description: "Spacious semi-furnished 2 BHK available for rent, overlooking beautifully landscaped gardens.",
-    beds: 2,
-    baths: 2,
-    sqft: 950,
-  },
-  {
-    id: "3",
-    title: "Rustomjee Urbania Compact",
-    type: "1 BHK",
-    status: "Sell",
-    price: "₹85 Lakhs",
-    location: "Majiwada, Ghodbunder Road, Thane",
-    image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80",
-    description: "Perfectly designed 1 BHK for modern nuclear families with excellent connectivity.",
-    beds: 1,
-    baths: 1,
-    sqft: 500,
-  },
-  {
-    id: "4",
-    title: "Puraniks City Reserva",
-    type: "2 BHK",
-    status: "Sell",
-    price: "₹1.2 Crores",
-    location: "Kasarvadavali, Ghodbunder Rd, Thane",
-    image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80",
-    description: "Elegant 2 BHK with Un-compromised views, state-of-the-art club house and premium finishes.",
-    beds: 2,
-    baths: 2,
-    sqft: 1100,
-  },
-  {
-    id: "5",
-    title: "Acme Ozone Premium",
-    type: "3 BHK",
-    status: "Rent",
-    price: "₹65,000 / month",
-    location: "Manpada, Ghodbunder Road, Thane",
-    image: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80",
-    description: "Fully furnished high-floor 3 BHK apartment ready to move in with all premium appliances.",
-    beds: 3,
-    baths: 3,
-    sqft: 1450,
-  },
-  {
-    id: "6",
-    title: "Cosmos Jewels Starter Home",
-    type: "1 BHK",
-    status: "Rent",
-    price: "₹25,000 / month",
-    location: "Ghodbunder Road, Thane",
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80",
-    description: "Bright and airy 1 BHK apartment, making it the perfect starter home or rental property.",
-    beds: 1,
-    baths: 1,
-    sqft: 550,
-  },
+const complexes = [
+  "Hiranandani Estate",
+  "Lodha Splendora",
+  "Rustomjee Urbania",
+  "Puraniks City Reserva",
+  "Acme Ozone",
+  "Cosmos Jewels",
+  "Kalpataru Hills",
+  "Raymond Realty Ten X",
+  "Dosti West County",
+  "Godrej Exquisite",
 ]
+
+const locations = [
+  "Ghodbunder Road, Thane",
+  "Majiwada, Thane",
+  "Kasarvadavali, Thane",
+  "Manpada, Thane",
+  "Waghbil, Thane",
+  "Balkum, Thane",
+  "Kolshet Road, Thane",
+]
+
+const getImage = (index: number) => {
+  const images = [
+    "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&q=80",
+    "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80",
+    "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80",
+    "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80",
+    "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80",
+    "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80",
+    "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800&q=80",
+    "https://images.unsplash.com/photo-1600566753190-17f0bb2a6c3e?w=800&q=80",
+    "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800&q=80",
+  ]
+  return images[index % images.length]
+}
+
+export const properties: Property[] = Array.from({ length: 54 }, (_, i) => {
+  const id = (i + 1).toString()
+  const complex = complexes[i % complexes.length]
+  const location = locations[i % locations.length]
+  const type: PropertyType = i % 3 === 0 ? "3 BHK" : i % 3 === 1 ? "2 BHK" : "1 BHK"
+  const status: PropertyStatus = i % 2 === 0 ? "Sell" : "Rent"
+  
+  let price = ""
+  if (status === "Sell") {
+    price = i % 3 === 0 ? "₹3.5 Crores" : i % 3 === 1 ? "₹1.5 Crores" : "₹85 Lakhs"
+  } else {
+    price = i % 3 === 0 ? "₹65,000 / mo" : i % 3 === 1 ? "₹45,000 / mo" : "₹25,000 / mo"
+  }
+
+  const beds = i % 3 === 0 ? 3 : i % 3 === 1 ? 2 : 1
+  const sqft = i % 3 === 0 ? 1500 + (i * 10) : i % 3 === 1 ? 950 + (i * 5) : 500 + i
+
+  return {
+    id,
+    title: `${complex} - ${status === "Sell" ? "Premium Unit" : "Luxury Rental"}`,
+    type,
+    status,
+    price,
+    location,
+    image: getImage(i),
+    description: `A beautiful ${type} residence in ${complex}, offering modern amenities and excellent views.`,
+    beds,
+    baths: beds,
+    sqft,
+  }
+})
 
 export const propertyTypes: PropertyType[] = ["1 BHK", "2 BHK", "3 BHK"]
 

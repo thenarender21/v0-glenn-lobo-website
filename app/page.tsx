@@ -16,7 +16,7 @@ export default function Home() {
     <main>
       <Navigation onOpenContact={() => setContactModalOpen(true)} />
       <Hero onOpenContact={() => setContactModalOpen(true)} />
-      <PropertyShowcase />
+      <PropertyShowcase limit={6} />
       <AgentSection onOpenContact={() => setContactModalOpen(true)} />
       <Testimonials />
       <Footer onOpenContact={() => setContactModalOpen(true)} />
