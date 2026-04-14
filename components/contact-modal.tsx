@@ -22,7 +22,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { contactFormSchema, ContactFormData } from "@/lib/form-schema"
-import { properties } from "@/lib/properties"
+import { useProperties } from "@/components/properties-provider"
 import { CheckCircle2, Loader2 } from "lucide-react"
 
 interface ContactModalProps {
@@ -31,6 +31,7 @@ interface ContactModalProps {
 }
 
 export function ContactModal({ open, onOpenChange }: ContactModalProps) {
+  const properties = useProperties()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
 
@@ -53,16 +54,45 @@ export function ContactModal({ open, onOpenChange }: ContactModalProps) {
 
   const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true)
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500))
-    console.log("Form submitted:", data)
-    setIsSubmitting(false)
-    setIsSuccess(true)
-    setTimeout(() => {
-      setIsSuccess(false)
-      reset()
-      onOpenChange(false)
-    }, 2000)
+    
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          records: [
+            {
+              fields: {
+                "Name": data.name,
+                "Phone": data.phone,
+                "Email": data.email,
+                "Property": data.propertyInterest || "",
+                "Lead Source": "popup",
+                "Page URL": window.location.href,
+                "Message": data.message || ""
+              }
+            }
+          ]
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to submit to Airtable");
+      }
+
+      setIsSuccess(true)
+      setTimeout(() => {
+        setIsSuccess(false)
+        reset()
+        onOpenChange(false)
+      }, 2000)
+    } catch (error) {
+      console.error("Error submitting form:", error)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleClose = (open: boolean) => {

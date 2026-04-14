@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils"
 
 interface NavigationProps {
   onOpenContact: () => void
+  variant?: "default" | "solid"
 }
 
 const navItems = [
@@ -19,7 +20,7 @@ const navItems = [
   { label: "Testimonials", href: "/#testimonials" },
 ]
 
-export function Navigation({ onOpenContact }: NavigationProps) {
+export function Navigation({ onOpenContact, variant = "default" }: NavigationProps) {
   const { scrollDirection, isAtTop } = useScrollDirection()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
@@ -33,14 +34,18 @@ export function Navigation({ onOpenContact }: NavigationProps) {
         transition={{ duration: 0.3, ease: "easeInOut" }}
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-colors duration-300",
-          isAtTop ? "bg-transparent" : "bg-background/95 backdrop-blur-md border-b border-border"
+          variant === "solid"
+            ? "bg-[#ffffff] border-b border-[#e5e5e5]"
+            : isAtTop
+              ? "bg-transparent"
+              : "bg-background/95 backdrop-blur-md border-b border-border"
         )}
       >
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
           <Link href="/" className="flex items-center gap-2">
             <span className={cn(
               "text-xl font-semibold tracking-tight transition-colors",
-              isAtTop ? "text-white" : "text-foreground"
+              variant === "solid" ? "text-[#111]" : isAtTop ? "text-white" : "text-foreground"
             )}>
               Thakurjee Properties
             </span>
@@ -53,7 +58,7 @@ export function Navigation({ onOpenContact }: NavigationProps) {
                 href={item.href}
                 className={cn(
                   "text-sm font-medium transition-colors hover:text-gold",
-                  isAtTop ? "text-white/90 hover:text-white" : "text-foreground/80 hover:text-foreground"
+                  variant === "solid" ? "text-[#222]" : isAtTop ? "text-white/90 hover:text-white" : "text-foreground/80 hover:text-foreground"
                 )}
               >
                 {item.label}
@@ -71,7 +76,7 @@ export function Navigation({ onOpenContact }: NavigationProps) {
             type="button"
             className={cn(
               "md:hidden p-2 -m-2",
-              isAtTop ? "text-white" : "text-foreground"
+              variant === "solid" ? "text-[#111]" : isAtTop ? "text-white" : "text-foreground"
             )}
             onClick={() => setMobileMenuOpen(true)}
           >

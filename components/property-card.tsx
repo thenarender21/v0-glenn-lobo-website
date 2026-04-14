@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import Image from "next/image"
+import Link from "next/link"
 import { Bed, Bath, Maximize } from "lucide-react"
 import { Property } from "@/lib/properties"
 import { cn } from "@/lib/utils"
@@ -13,14 +14,15 @@ interface PropertyCardProps {
 
 export function PropertyCard({ property, index }: PropertyCardProps) {
   return (
-    <motion.article
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
-      whileHover={{ y: -8 }}
-      className="group relative overflow-hidden rounded-lg bg-card shadow-sm transition-shadow duration-300 hover:shadow-xl"
-    >
+    <Link href={`/properties/${property.id}`} className="block h-full">
+      <motion.article
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
+        whileHover={{ y: -8 }}
+        className="group h-full relative overflow-hidden rounded-lg bg-card shadow-sm transition-shadow duration-300 hover:shadow-xl"
+      >
       <div className="relative aspect-[4/3] overflow-hidden">
         <Image
           src={property.image}
@@ -84,5 +86,6 @@ export function PropertyCard({ property, index }: PropertyCardProps) {
         </div>
       </div>
     </motion.article>
+    </Link>
   )
 }

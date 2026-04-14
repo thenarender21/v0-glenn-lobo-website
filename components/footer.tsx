@@ -71,7 +71,7 @@ export function Footer({ onOpenContact }: FooterProps) {
             <ul className="mt-4 space-y-3">
               <li className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Phone className="size-4 text-gold" />
-                <span>+91 98765 43210</span>
+                <span>07972781688</span>
               </li>
               <li className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Mail className="size-4 text-gold" />
@@ -79,7 +79,7 @@ export function Footer({ onOpenContact }: FooterProps) {
               </li>
               <li className="flex items-start gap-2 text-sm text-muted-foreground">
                 <MapPin className="mt-0.5 size-4 shrink-0 text-gold" />
-                <span>Thakurjee Properties, Ghodbunder Road, Thane 400607</span>
+                <span>Shop No.-5, JVM Florencia Kavya, Haware City, Thane West, Thane, Maharashtra 400615</span>
               </li>
             </ul>
           </div>

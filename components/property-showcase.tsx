@@ -3,7 +3,8 @@
 import { useState, useMemo } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
-import { properties, PropertyType, PropertyStatus } from "@/lib/properties"
+import { PropertyType, PropertyStatus } from "@/lib/properties"
+import { useProperties } from "@/components/properties-provider"
 import { PropertyCard } from "@/components/property-card"
 import { PropertyFilter } from "@/components/property-filter"
 import { Button } from "@/components/ui/button"
@@ -13,6 +14,7 @@ interface PropertyShowcaseProps {
 }
 
 export function PropertyShowcase({ limit }: PropertyShowcaseProps) {
+  const properties = useProperties()
   const [activeTypeFilter, setActiveTypeFilter] = useState<PropertyType | "All">("All")
   const [activeStatusFilter, setActiveStatusFilter] = useState<PropertyStatus | "All">("All")
 

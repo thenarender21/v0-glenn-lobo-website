@@ -1,7 +1,6 @@
 "use client"
 
 import { motion } from "framer-motion"
-import Image from "next/image"
 import { Quote } from "lucide-react"
 import { testimonials } from "@/lib/properties"
 
@@ -39,14 +38,8 @@ export function Testimonials() {
                 &ldquo;{testimonial.quote}&rdquo;
               </blockquote>
               <div className="mt-6 flex items-center gap-4">
-                <div className="relative size-12 overflow-hidden rounded-full">
-                  <Image
-                    src={testimonial.image}
-                    alt={testimonial.name}
-                    fill
-                    sizes="48px"
-                    className="object-cover"
-                  />
+                <div className="flex size-12 shrink-0 items-center justify-center overflow-hidden rounded-full bg-gold text-xl font-bold text-charcoal">
+                  {testimonial.name.charAt(0).toUpperCase()}
                 </div>
                 <div>
                   <p className="font-medium text-white">{testimonial.name}</p>
