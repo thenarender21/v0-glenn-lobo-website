@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { SpeedInsights } from '@vercel/speed-insights/next'
+import { GoogleTagManager } from '@next/third-parties/google'
 import { LeadCapturePopup } from '@/components/lead-capture-popup'
 import { PropertiesProvider } from '@/components/properties-provider'
 import { getProperties } from '@/lib/properties'
@@ -40,35 +42,16 @@ export default async function RootLayout({
   const properties = await getProperties()
   return (
     <html lang="en">
-      <head>
-        {process.env.NODE_ENV === "production" && (
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-N9T7N3D7');`,
-            }}
-          />
-        )}
-      </head>
+      {process.env.NODE_ENV === "production" && (
+        <GoogleTagManager gtmId="GTM-N9T7N3D7" />
+      )}
       <body className="font-sans antialiased">
-        {process.env.NODE_ENV === "production" && (
-          <noscript>
-            <iframe
-              src="https://www.googletagmanager.com/ns.html?id=GTM-N9T7N3D7"
-              height="0"
-              width="0"
-              style={{ display: "none", visibility: "hidden" }}
-            ></iframe>
-          </noscript>
-        )}
         <PropertiesProvider properties={properties}>
           {children}
           <LeadCapturePopup />
         </PropertiesProvider>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )

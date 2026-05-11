@@ -12,19 +12,26 @@ import { Footer } from "@/components/footer"
 
 export default function Home() {
   const [contactModalOpen, setContactModalOpen] = useState(false)
+  const [leadSource, setLeadSource] = useState("Website Home")
+
+  const handleOpenContact = (source: string) => {
+    setLeadSource(source)
+    setContactModalOpen(true)
+  }
 
   return (
     <main>
-      <Navigation onOpenContact={() => setContactModalOpen(true)} />
-      <Hero onOpenContact={() => setContactModalOpen(true)} />
+      <Navigation onOpenContact={() => handleOpenContact("Navigation CTA - Home")} />
+      <Hero onOpenContact={() => handleOpenContact("Hero CTA - Home")} />
       <PropertyShowcase limit={6} />
       <LocationSection />
-      <AgentSection onOpenContact={() => setContactModalOpen(true)} />
+      <AgentSection onOpenContact={() => handleOpenContact("Agent Section CTA - Home")} />
       <Testimonials />
-      <Footer onOpenContact={() => setContactModalOpen(true)} />
+      <Footer onOpenContact={() => handleOpenContact("Footer CTA - Home")} />
       <ContactModal
         open={contactModalOpen}
         onOpenChange={setContactModalOpen}
+        source={leadSource}
       />
     </main>
   )

@@ -28,9 +28,10 @@ import { CheckCircle2, Loader2 } from "lucide-react"
 interface ContactModalProps {
   open: boolean
   onOpenChange: (open: boolean) => void
+  source?: string
 }
 
-export function ContactModal({ open, onOpenChange }: ContactModalProps) {
+export function ContactModal({ open, onOpenChange, source = "Website popup" }: ContactModalProps) {
   const properties = useProperties()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
@@ -69,7 +70,7 @@ export function ContactModal({ open, onOpenChange }: ContactModalProps) {
                 "Phone": data.phone,
                 "Email": data.email,
                 "Property": data.propertyInterest || "",
-                "Lead Source": "popup",
+                "Lead Source": source,
                 "Page URL": window.location.href,
                 "Message": data.message || ""
               }

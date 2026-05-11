@@ -34,6 +34,12 @@ export default function LocationPropertiesPage() {
   const [activeTypeFilter, setActiveTypeFilter] = useState<PropertyType | "All">("All")
   const [activeStatusFilter, setActiveStatusFilter] = useState<PropertyStatus | "All">("All")
   const [contactModalOpen, setContactModalOpen] = useState(false)
+  const [leadSource, setLeadSource] = useState("Website Location Page")
+
+  const handleOpenContact = (source: string) => {
+    setLeadSource(source)
+    setContactModalOpen(true)
+  }
 
   // If the route doesn't match our valid location slugs, show 404
   if (!locationName) {
@@ -55,7 +61,7 @@ export default function LocationPropertiesPage() {
 
   return (
     <main className="min-h-screen bg-background">
-      <Navigation onOpenContact={() => setContactModalOpen(true)} variant="solid" />
+      <Navigation onOpenContact={() => handleOpenContact(`Navigation CTA - ${locationName}`)} variant="solid" />
       
       <div className="pt-24 pb-12 lg:pt-32 lg:pb-20">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -136,10 +142,11 @@ export default function LocationPropertiesPage() {
         </div>
       </div>
 
-      <Footer onOpenContact={() => setContactModalOpen(true)} />
+      <Footer onOpenContact={() => handleOpenContact(`Footer CTA - ${locationName}`)} />
       <ContactModal
         open={contactModalOpen}
         onOpenChange={setContactModalOpen}
+        source={leadSource}
       />
     </main>
   )

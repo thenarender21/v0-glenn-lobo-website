@@ -58,6 +58,12 @@ export default function PropertyDetailPage() {
   const router = useRouter()
   const { toast } = useToast()
   const [contactModalOpen, setContactModalOpen] = useState(false)
+  const [leadSource, setLeadSource] = useState("Website Property Detail")
+
+  const handleOpenContact = (source: string) => {
+    setLeadSource(source)
+    setContactModalOpen(true)
+  }
   
   const property = useMemo(() => {
     return properties.find((p) => p.id === id)
@@ -77,6 +83,7 @@ export default function PropertyDetailPage() {
     phone: "",
     message: "",
   })
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   // Provide initial message if property exists
   useEffect(() => {
@@ -91,30 +98,66 @@ export default function PropertyDetailPage() {
   if (!property) {
     return (
       <main className="min-h-screen bg-background">
-        <Navigation onOpenContact={() => setContactModalOpen(true)} variant="solid" />
+        <Navigation onOpenContact={() => handleOpenContact("Navigation CTA - Not Found")} variant="solid" />
         <div className="flex h-[70vh] flex-col items-center justify-center gap-4">
           <h1 className="text-2xl font-bold">Property not found</h1>
           <Button onClick={() => router.push("/properties")} variant="outline">
             Return to Properties
           </Button>
         </div>
-        <Footer onOpenContact={() => setContactModalOpen(true)} />
+        <Footer onOpenContact={() => handleOpenContact("Footer CTA - Not Found")} />
       </main>
     )
   }
 
-  const handleEnquirySubmit = (e: React.FormEvent) => {
+  const handleEnquirySubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    toast({
-      title: "Enquiry Sent",
-      description: "Mukund Thakur will get back to you shortly.",
-    })
-    setFormData({ name: "", phone: "", message: "" })
+    setIsSubmitting(true)
+    
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          records: [
+            {
+              fields: {
+                "Name": formData.name,
+                "Phone": formData.phone,
+                "Property": property ? property.title : "",
+                "Lead Source": "property-page",
+                "Page URL": window.location.href,
+                "Message": formData.message
+              }
+            }
+          ]
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to submit");
+      }
+
+      toast({
+        title: "Enquiry Sent",
+        description: "Mukund Thakur will get back to you shortly.",
+      })
+      setFormData({ name: "", phone: "", message: property ? `Hi, I am interested in ${property.title} located at ${property.location}.` : "" })
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to send enquiry. Please try again.",
+        variant: "destructive"
+      })
+      console.error("Property enquiry submission error:", error)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
     <main className="min-h-screen bg-background">
-      <Navigation onOpenContact={() => setContactModalOpen(true)} variant="solid" />
+      <Navigation onOpenContact={() => handleOpenContact(`Navigation CTA - Property ${property.id}`)} variant="solid" />
       
       <div className="pt-24 pb-24 lg:pt-32 lg:pb-32">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -333,8 +376,8 @@ export default function PropertyDetailPage() {
                         required
                         className="bg-background min-h-[100px] resize-none"
                       />
-                      <Button type="submit" className="w-full bg-gold text-charcoal hover:bg-gold-light font-medium">
-                        Send Enquiry
+                      <Button type="submit" disabled={isSubmitting} className="w-full bg-gold text-charcoal hover:bg-gold-light font-medium">
+                        {isSubmitting ? "Sending..." : "Send Enquiry"}
                       </Button>
                     </form>
                   </div>
@@ -365,10 +408,11 @@ export default function PropertyDetailPage() {
         </div>
       </div>
 
-      <Footer onOpenContact={() => setContactModalOpen(true)} />
+      <Footer onOpenContact={() => handleOpenContact(`Footer CTA - Property ${property.id}`)} />
       <ContactModal
         open={contactModalOpen}
         onOpenChange={setContactModalOpen}
+        source={leadSource}
       />
       
       {/* Mobile Sticky Bottom Bar (visible only below lg breakpoint) */}

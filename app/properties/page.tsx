@@ -18,6 +18,12 @@ export default function PropertiesPage() {
   const [activeStatusFilter, setActiveStatusFilter] = useState<PropertyStatus | "All">("All")
   const [searchQuery, setSearchQuery] = useState("")
   const [contactModalOpen, setContactModalOpen] = useState(false)
+  const [leadSource, setLeadSource] = useState("Website Properties Page")
+
+  const handleOpenContact = (source: string) => {
+    setLeadSource(source)
+    setContactModalOpen(true)
+  }
 
   const filteredProperties = useMemo(() => {
     return properties.filter((property) => {
@@ -47,7 +53,7 @@ export default function PropertiesPage() {
 
   return (
     <main className="min-h-screen bg-background">
-      <Navigation onOpenContact={() => setContactModalOpen(true)} variant="solid" />
+      <Navigation onOpenContact={() => handleOpenContact("Navigation CTA - Properties Page")} variant="solid" />
       
       <div className="pt-24 pb-12 lg:pt-32 lg:pb-20">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -124,10 +130,11 @@ export default function PropertiesPage() {
         </div>
       </div>
 
-      <Footer onOpenContact={() => setContactModalOpen(true)} />
+      <Footer onOpenContact={() => handleOpenContact("Footer CTA - Properties Page")} />
       <ContactModal
         open={contactModalOpen}
         onOpenChange={setContactModalOpen}
+        source={leadSource}
       />
     </main>
   )

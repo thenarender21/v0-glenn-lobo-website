@@ -65,16 +65,40 @@ export function LeadCapturePopup() {
     e.preventDefault()
     setIsSubmitting(true)
     
-    // Simulate API call to CRM
-    await new Promise((resolve) => setTimeout(resolve, 1500))
-    
-    setIsSubmitting(false)
-    setIsSuccess(true)
-    
-    setTimeout(() => {
-      setIsSuccess(false)
-      handleClose()
-    }, 2000)
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          records: [
+            {
+              fields: {
+                "Name": formData.name,
+                "Phone": formData.phone,
+                "Property": formData.location || "",
+                "Lead Source": "lead-capture-popup",
+                "Page URL": window.location.href,
+                "Message": formData.budget ? `Budget: ${formData.budget}` : ""
+              }
+            }
+          ]
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to submit");
+      }
+
+      setIsSuccess(true)
+      setTimeout(() => {
+        setIsSuccess(false)
+        handleClose()
+      }, 2000)
+    } catch (error) {
+      console.error("Popup submission error:", error)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
