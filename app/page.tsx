@@ -4,7 +4,6 @@ import { useState } from "react"
 import { Navigation } from "@/components/navigation"
 import { Hero } from "@/components/hero"
 import { PropertyShowcase } from "@/components/property-showcase"
-import { LocationSection } from "@/components/location-section"
 import { AgentSection } from "@/components/agent-section"
 import { Testimonials } from "@/components/testimonials"
 import { ContactModal } from "@/components/contact-modal"
@@ -24,7 +23,6 @@ export default function Home() {
       <Navigation onOpenContact={() => handleOpenContact("Navigation CTA - Home")} />
       <Hero onOpenContact={() => handleOpenContact("Hero CTA - Home")} />
       <PropertyShowcase limit={6} />
-      <LocationSection />
       <AgentSection onOpenContact={() => handleOpenContact("Agent Section CTA - Home")} />
       <Testimonials />
       <Footer onOpenContact={() => handleOpenContact("Footer CTA - Home")} />
