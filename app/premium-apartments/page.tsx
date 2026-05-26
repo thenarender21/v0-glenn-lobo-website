@@ -27,7 +27,7 @@ export default function PremiumApartmentsLanding() {
     <>
       <Navigation onOpenContact={() => handleOpenContact("Navigation CTA - Premium Landing")} />
       
-      <PremiumLandingHero />
+      <PremiumLandingHero onOpenContact={() => handleOpenContact("Hero CTA - Premium Landing")} />
       <PremiumFeaturedProperties />
       <PremiumAmenities />
       

@@ -89,6 +89,17 @@ export function Footer({ onOpenContact }: FooterProps) {
           <p className="text-sm text-muted-foreground">
             &copy; {currentYear} Thakurjee Properties. All rights reserved.
           </p>
+          <p className="text-sm text-muted-foreground">
+            Designed by{" "}
+            <a
+              href="https://thenarender.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline transition-colors hover:text-foreground"
+            >
+              narender
+            </a>
+          </p>
           <div className="flex gap-6">
             <a
               href="#"
