@@ -154,15 +154,124 @@ export const agentInfo = {
   ],
 }
 
+export const premiumApartmentProperties: Property[] = [
+  {
+    id: "raunak-108",
+    title: "Raunak 108 – Premium 1 BHK Smart Home",
+    type: "1 BHK",
+    status: "Sell",
+    price: "₹67 Lakhs",
+    location: "Kasarvadavali, Thane",
+    image: "/images/raunak-108/image_1.jpg",
+    description: "Live at Raunak 108, Kasarvadavali — thoughtfully designed 1 BHK homes with modern amenities, rooftop lifestyle spaces, and seamless connectivity. This 40 storey landmark tower features smart home fittings, Godrej video door bells, and premium bathroom and kitchen sanitaryware. Conveniently located behind Vedant Hospital, it is just 5 minutes from the upcoming Kasarvadavali Metro Station, ensuring great connectivity for daily commuters.",
+    beds: 1,
+    baths: 1,
+    sqft: 410,
+    floor: 25,
+    age: "New Launch",
+    gallery: [
+      "/images/raunak-108/image_1.jpg",
+      "/images/raunak-108/image_6.jpg",
+      "/images/raunak-108/image_8.jpg",
+      "/images/raunak-108/image_12.jpg",
+      "/images/raunak-108/image_15.jpg"
+    ],
+    amenities: [
+      "Gymnasium",
+      "Covered Parking",
+      "24/7 Security",
+      "Power Backup",
+      "Clubhouse",
+      "Children's Play Area",
+      "Lift",
+      "Intercom"
+    ]
+  },
+  {
+    id: "raunak-max-city-2bhk",
+    title: "Raunak Maximum City – Luxury 2 BHK XL Smart Home",
+    type: "2 BHK",
+    status: "Sell",
+    price: "₹93 Lakhs",
+    location: "Ghodbunder Road, Thane",
+    image: "/images/raunak-max-city-2bhk/image_1.jpg",
+    description: "Experience spacious living at Raunak Maximum City with premium 2 BHK XL smart homes, nature-inspired lifestyle spaces, and world-class township amenities. Part of a 22-acre modern integrated township, these homes feature spacious bedroom layouts, high-end Jio Fiber powered home automation, and stunning views of the surrounding landscape. The project features a 4-level podium, stilt parking, and 35-storey residential towers designed for maximum efficiency.",
+    beds: 2,
+    baths: 2,
+    sqft: 610,
+    floor: 18,
+    age: "Under Construction",
+    gallery: [
+      "/images/raunak-max-city-2bhk/image_7.jpg",
+      "/images/raunak-max-city-2bhk/image_1.jpg",
+      "/images/raunak-max-city-2bhk/image_3.jpg",
+      "/images/raunak-max-city-2bhk/image_4.jpg",
+      "/images/raunak-max-city-2bhk/image_5.jpg",
+      "/images/raunak-max-city-2bhk/image_6.jpg"
+    ],
+    amenities: [
+      "Gymnasium",
+      "Swimming Pool",
+      "Covered Parking",
+      "24/7 Security",
+      "Power Backup",
+      "Clubhouse",
+      "Children's Play Area",
+      "Lift",
+      "Intercom"
+    ]
+  },
+  {
+    id: "lodha-sterling",
+    title: "Lodha Sterling – Luxury 3 BHK Homes",
+    type: "3 BHK",
+    status: "Sell",
+    price: "Starting from ₹2.40 Cr",
+    location: "Kolshet Road, Thane West",
+    image: "/images/lodha-sterling/image_1.jpg",
+    description: "Experience regal London-inspired living at Lodha Sterling — a 11-acre green township on Kolshet Road, Thane. Offering spacious 3 BHK residences with world-class amenities and 70% open green spaces.",
+    beds: 3,
+    baths: 3,
+    sqft: 1266,
+    floor: 5,
+    age: "Ready to Move",
+    gallery: [
+      "/images/lodha-sterling/image_1.jpg"
+    ],
+    amenities: [
+      "Swimming Pool",
+      "Gymnasium",
+      "Clubhouse",
+      "Amphitheatre",
+      "Children's Play Area",
+      "Indoor Games",
+      "Multipurpose Lawn",
+      "Jogging Track"
+    ]
+  }
+]
+
 export async function getProperties(): Promise<Property[]> {
+  let list: Property[] = []
   try {
      const fetchedProperties = await fetchPropertiesFromSheet();
      if (fetchedProperties && fetchedProperties.length > 0) {
-        return fetchedProperties;
+        list = fetchedProperties;
+     } else {
+        list = fallbackProperties;
      }
   } catch(e) {
     console.error("Failed to fetch sheet properties, falling back to mock data", e)
+    list = fallbackProperties;
   }
-  return fallbackProperties;
+
+  // Combine and deduplicate list ensuring premium ones are at the front
+  const uniqueList = [...premiumApartmentProperties];
+  list.forEach(p => {
+    if (!uniqueList.some(item => item.id === p.id)) {
+      uniqueList.push(p);
+    }
+  });
+  return uniqueList;
 }
 

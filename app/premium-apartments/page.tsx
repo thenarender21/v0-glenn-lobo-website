@@ -5,8 +5,6 @@ import { PremiumLandingHero } from "@/components/landing/premium-landing-hero"
 import { PremiumFeaturedProperties } from "@/components/landing/premium-featured-properties"
 import { PremiumAmenities } from "@/components/landing/premium-amenities"
 import { LeadCaptureSection } from "@/components/landing/lead-capture-section"
-import { FinalCta } from "@/components/landing/final-cta"
-import { StickyCta } from "@/components/landing/sticky-cta"
 
 import { Navigation } from "@/components/navigation"
 import { AgentSection } from "@/components/agent-section"
@@ -35,7 +33,6 @@ export default function PremiumApartmentsLanding() {
       <Testimonials />
       
       <LeadCaptureSection />
-      <FinalCta />
       
       <Footer onOpenContact={() => handleOpenContact("Footer CTA - Premium Landing")} />
       
@@ -44,7 +41,6 @@ export default function PremiumApartmentsLanding() {
         onOpenChange={setContactModalOpen}
         source={leadSource}
       />
-      <StickyCta />
     </>
   )
 }

@@ -7,81 +7,57 @@ import { ArrowRight, Download } from "lucide-react"
 
 const amenities = [
   {
-    title: "Skyline Jacuzzi",
-    description: "Relax with breathtaking skyline views.",
-    image: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=600&q=80",
-    icon: "✦",
-  },
-  {
-    title: "Rooftop Movie Screening",
-    description: "Enjoy open-air cinema nights with family.",
-    image: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=600&q=80",
-    icon: "✦",
-  },
-  {
     title: "Swimming Pool",
-    description: "Luxury leisure pool with premium deck.",
-    image: "https://images.unsplash.com/photo-1576013551627-1cc001f8088b?w=600&q=80",
+    description: "Luxury leisure pool with premium sun deck.",
+    image: "/images/Swimming_pool_02.jpg",
     icon: "✦",
   },
   {
-    title: "Fitness Center",
-    description: "Modern gym for your active lifestyle.",
-    image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&q=80",
-    icon: "✦",
-  },
-  {
-    title: "Yoga Deck",
-    description: "Peaceful wellness space for mind & body.",
-    image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&q=80",
-    icon: "✦",
-  },
-  {
-    title: "Tropical Forest & Zen Garden",
-    description: "Nature-inspired green relaxation zones.",
-    image: "https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&q=80",
+    title: "Fitness Center & Gym",
+    description: "State-of-the-art gym for your active lifestyle.",
+    image: "/images/Club_house.jpg",
     icon: "✦",
   },
   {
     title: "Kids Play Area",
-    description: "Safe and fun spaces for children.",
-    image: "https://images.unsplash.com/photo-1601313584698-fc6b83c5af38?w=600&q=80",
+    description: "Safe, vibrant outdoor play spaces for children.",
+    image: "/images/children_play_area.jpg",
     icon: "✦",
   },
   {
-    title: "Co-working Space",
-    description: "Work comfortably within your community.",
-    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80",
+    title: "Rooftop Lounge & BBQ",
+    description: "Premium social spaces with open-sky skyline views.",
+    image: "/images/terrace_view_02.jpg",
     icon: "✦",
   },
   {
-    title: "Celebration Hall",
-    description: "Host parties and memorable events.",
-    image: "https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=600&q=80",
+    title: "Jogging & Sports Track",
+    description: "Dedicated outdoor track for running and sports.",
+    image: "/images/Cricket_Cam.jpg",
     icon: "✦",
   },
   {
-    title: "Jogging & Cycling Track",
-    description: "Healthy outdoor lifestyle experience.",
-    image: "https://images.unsplash.com/photo-1571008887538-b36bb32f4571?w=600&q=80",
+    title: "Grand Clubhouse",
+    description: "Iconic clubhouse at the heart of the community.",
+    image: "/images/Cam_03.jpg",
     icon: "✦",
   },
   {
-    title: "Heated Kids Pool",
-    description: "Premium family-friendly pool experience.",
-    image: "https://images.unsplash.com/photo-1560089000-7433a4ebbd64?w=600&q=80",
+    title: "Tropical Garden & Green Spaces",
+    description: "Lush nature-inspired zones for peace and relaxation.",
+    image: "/images/evening_view.jpg",
     icon: "✦",
   },
   {
-    title: "Rooftop Lounge & BBQ Area",
-    description: "Perfect social spaces with skyline views.",
-    image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600&q=80",
+    title: "Indoor Games Zone",
+    description: "Fun-filled indoor activities for the whole family.",
+    image: "/images/Night_cam.jpg",
     icon: "✦",
   },
 ]
 
-// Duplicate for seamless infinite loop
-const loopedAmenities = [...amenities, ...amenities]
+// Only loop through these 8, do not duplicate/repeat them
+const loopedAmenities = amenities
 
 export function PremiumAmenities() {
   const trackRef = useRef<HTMLDivElement>(null)

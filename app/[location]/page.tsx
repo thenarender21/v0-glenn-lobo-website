@@ -48,16 +48,15 @@ export default function LocationPropertiesPage() {
 
   const filteredProperties = useMemo(() => {
     return properties.filter((property) => {
-      // 1. Placeholder logic: Currently returns all for demonstration, 
-      // but in real app we'd match against property.location
-      const passesLocation = true 
+      // Filter based on whether the property's location contains the location name
+      const passesLocation = property.location.toLowerCase().includes(locationName.toLowerCase())
       
       const passesType = activeTypeFilter === "All" || property.type === activeTypeFilter
       const passesStatus = activeStatusFilter === "All" || property.status === activeStatusFilter
       
       return passesLocation && passesType && passesStatus
     })
-  }, [activeTypeFilter, activeStatusFilter])
+  }, [properties, locationName, activeTypeFilter, activeStatusFilter])
 
   return (
     <main className="min-h-screen bg-background">

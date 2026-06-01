@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Image from "next/image"
+import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { CheckCircle2, MapPin, CalendarDays, ArrowRight } from "lucide-react"
@@ -43,23 +44,28 @@ const raunakMaxCityAmenities = [
   "Jogging Track", "Heated Kids Pool", "Fitness Center",
 ]
 
-const jodiHighlights = [
-  "Limited Exclusive Inventory",
-  "Large Family-Centric Layouts",
-  "Premium High-Rise Living",
-  "Smart Homes Powered by Jio Fiber",
-  "Rooftop Lifestyle Experiences",
-  "Nature-Focused Township",
-  "22 Acre Integrated Development",
-  "1,00,000+ Sq.Ft. Recreation Zones",
-  "Modern Architecture with Spacious Planning",
-  "Excellent Connectivity to Metro & Ghodbunder Road",
+const lodhaSterlingConfigs = [
+  { area: "968 Sq.Ft.", label: "RERA Carpet", price: "₹2.40 Cr", note: "All Inclusive" },
+  { area: "1041 Sq.Ft.", label: "RERA Carpet", price: "₹2.70 Cr", note: "All Inclusive" },
+  { area: "1134 Sq.Ft.", label: "RERA Carpet", price: "₹2.91 Cr", note: "All Inclusive" },
+  { area: "1266 Sq.Ft.", label: "RERA Carpet + Balcony", price: "₹3.19 Cr", note: "All Inclusive" },
 ]
 
-const jodiAmenities = [
-  "Skyline Rooftop Spaces", "Jacuzzi & Observatory Deck", "Tropical Forest & Zen Gardens",
-  "Multi-Sports Zone", "Co-working & Lounge Spaces", "Swimming Pool",
-  "Yoga & Meditation Deck", "Celebration Hall", "Kids Activity Zones", "Premium Club Lifestyle",
+const lodhaSterlingHighlights = [
+  "11 Acre Green Township",
+  "70% Open Green Spaces",
+  "25+ Luxury Amenities",
+  "Near Jupiter Hospital & Viviana Mall",
+  "10 Min from Thane Railway Station",
+  "45 Min from International Airport",
+  "Swimming Pool, Gymnasium & Clubhouse",
+  "Ampitheatre & Kids Play Area",
+  "RERA Registered — Tower G: P51700020158",
+]
+
+const lodhaSterlingAmenities = [
+  "Swimming Pool", "Gymnasium", "Clubhouse", "Amphitheatre",
+  "Kids Play Area", "Indoor Games", "Multipurpose Lawn", "Jogging Track"
 ]
 
 const propertiesData = {
@@ -141,12 +147,12 @@ export function PremiumFeaturedProperties() {
               >
                 <div className="grid grid-cols-1 lg:grid-cols-2">
                   {/* Image Side */}
-                  <div className="relative min-h-[320px] lg:min-h-[520px] overflow-hidden">
+                  <Link href="/properties/raunak-108" className="relative min-h-[320px] lg:min-h-[520px] overflow-hidden group block">
                     <Image
-                      src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=1200&q=80"
+                      src="/images/raunak-108/image_1.jpg"
                       alt="Raunak 108 – 1 BHK Smart Homes, Kasarvadavali Thane"
                       fill
-                      className="object-cover"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent lg:bg-gradient-to-t lg:from-black/60 lg:via-transparent lg:to-transparent" />
                     {/* Badges */}
@@ -160,68 +166,72 @@ export function PremiumFeaturedProperties() {
                       <p className="text-3xl font-bold text-gold leading-tight">₹67 Lakhs</p>
                       <p className="text-xs text-white/60 mt-0.5">All Inclusive</p>
                     </div>
-                  </div>
-
-                  {/* Content Side */}
-                  <div className="flex flex-col justify-between p-8 lg:p-10">
-                    <div>
-                      <span className="inline-block rounded-full bg-gold/10 border border-gold/30 px-3 py-1 text-xs font-semibold text-gold uppercase tracking-widest mb-4">
-                        1 BHK Smart Homes
-                      </span>
-                      <h3 className="text-3xl font-bold text-foreground leading-tight">
-                        Premium 1 BHK Smart Homes in Thane
-                      </h3>
-                      <p className="mt-3 text-muted-foreground leading-relaxed">
-                        Live at <span className="text-foreground font-semibold">Raunak 108</span>, Kasarvadavali — thoughtfully designed homes with modern amenities, rooftop lifestyle spaces, and seamless connectivity.
-                      </p>
-
-                      {/* Key Details Row */}
-                      <div className="mt-6 grid grid-cols-2 gap-3">
-                        <div className="flex items-center gap-2 rounded-lg bg-muted px-3 py-2">
-                          <MapPin className="h-4 w-4 text-gold shrink-0" />
-                          <span className="text-xs font-medium text-foreground">Kasarvadavali, Thane</span>
-                        </div>
-                        <div className="flex items-center gap-2 rounded-lg bg-muted px-3 py-2">
-                          <CalendarDays className="h-4 w-4 text-gold shrink-0" />
-                          <span className="text-xs font-medium text-foreground">Possession: Dec 2026</span>
-                        </div>
-                      </div>
-
-                      {/* Carpet Area */}
-                      <div className="mt-4 rounded-lg border border-border bg-background px-4 py-3">
-                        <p className="text-xs text-muted-foreground uppercase tracking-wider font-medium">Carpet Area</p>
-                        <p className="text-sm font-semibold text-foreground mt-0.5">410 / 412 / 425 Sq.Ft.</p>
-                      </div>
-
-                      {/* Highlights Grid */}
-                      <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-y-2.5 gap-x-4">
-                        {raunak108Highlights.map((point) => (
-                          <div key={point} className="flex items-start gap-2">
-                            <CheckCircle2 className="h-4 w-4 text-gold mt-0.5 shrink-0" />
-                            <span className="text-sm text-foreground/80">{point}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* CTAs */}
-                    <div className="mt-8 flex flex-col sm:flex-row gap-3">
-                      <Button
-                        onClick={scrollToForm}
-                        className="flex-1 bg-gold text-charcoal hover:bg-gold/90 font-semibold text-sm h-11 gap-2"
-                      >
-                        Book Free Site Visit
-                        <ArrowRight className="h-4 w-4" />
-                      </Button>
-                      <Button
-                        onClick={scrollToForm}
-                        variant="outline"
-                        className="flex-1 border-gold/50 text-gold hover:bg-gold/10 font-semibold text-sm h-11"
-                      >
-                        Get Price Sheet
-                      </Button>
-                    </div>
-                  </div>
+                  </Link>
+ 
+                   {/* Content Side */}
+                   <div className="flex flex-col justify-between p-8 lg:p-10">
+                     <div>
+                       <span className="inline-block rounded-full bg-gold/10 border border-gold/30 px-3 py-1 text-xs font-semibold text-gold uppercase tracking-widest mb-4">
+                         1 BHK Smart Homes
+                       </span>
+                       <h3 className="text-3xl font-bold text-foreground leading-tight hover:text-gold transition-colors">
+                         <Link href="/properties/raunak-108">
+                           Premium 1 BHK Smart Homes in Thane
+                         </Link>
+                       </h3>
+                       <p className="mt-3 text-muted-foreground leading-relaxed">
+                         Live at <span className="text-foreground font-semibold">Raunak 108</span>, Kasarvadavali — thoughtfully designed homes with modern amenities, rooftop lifestyle spaces, and seamless connectivity.
+                       </p>
+ 
+                       {/* Key Details Row */}
+                       <div className="mt-6 grid grid-cols-2 gap-3">
+                         <div className="flex items-center gap-2 rounded-lg bg-muted px-3 py-2">
+                           <MapPin className="h-4 w-4 text-gold shrink-0" />
+                           <span className="text-xs font-medium text-foreground">Kasarvadavali, Thane</span>
+                         </div>
+                         <div className="flex items-center gap-2 rounded-lg bg-muted px-3 py-2">
+                           <CalendarDays className="h-4 w-4 text-gold shrink-0" />
+                           <span className="text-xs font-medium text-foreground">Possession: Dec 2026</span>
+                         </div>
+                       </div>
+ 
+                       {/* Carpet Area */}
+                       <div className="mt-4 rounded-lg border border-border bg-background px-4 py-3">
+                         <p className="text-xs text-muted-foreground uppercase tracking-wider font-medium">Carpet Area</p>
+                         <p className="text-sm font-semibold text-foreground mt-0.5">410 / 412 / 425 Sq.Ft.</p>
+                       </div>
+ 
+                       {/* Highlights Grid */}
+                       <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-y-2.5 gap-x-4">
+                         {raunak108Highlights.map((point) => (
+                           <div key={point} className="flex items-start gap-2">
+                             <CheckCircle2 className="h-4 w-4 text-gold mt-0.5 shrink-0" />
+                             <span className="text-sm text-foreground/80">{point}</span>
+                           </div>
+                         ))}
+                       </div>
+                     </div>
+ 
+                     {/* CTAs */}
+                     <div className="mt-8 flex flex-col sm:flex-row gap-3">
+                       <Button
+                         onClick={scrollToForm}
+                         className="flex-1 bg-gold text-charcoal hover:bg-gold/90 font-semibold text-sm h-11 gap-2"
+                       >
+                         Book Free Site Visit
+                         <ArrowRight className="h-4 w-4" />
+                       </Button>
+                       <Button
+                         asChild
+                         variant="outline"
+                         className="flex-1 border-gold/50 text-gold hover:bg-gold/10 font-semibold text-sm h-11"
+                       >
+                         <Link href="/properties/raunak-108">
+                           View Details
+                         </Link>
+                       </Button>
+                     </div>
+                   </div>
                 </div>
               </motion.div>
             ) : activeTab === "2BHK" ? (
@@ -235,12 +245,12 @@ export function PremiumFeaturedProperties() {
               >
                 <div className="grid grid-cols-1 lg:grid-cols-2">
                   {/* Image Side */}
-                  <div className="relative min-h-[340px] lg:min-h-[600px] overflow-hidden">
+                  <Link href="/properties/raunak-max-city-2bhk" className="relative min-h-[340px] lg:min-h-[600px] overflow-hidden group block">
                     <Image
-                      src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=80"
+                      src="/images/raunak-max-city-2bhk/image_1.jpg"
                       alt="Raunak Maximum City – 2 BHK XL Smart Homes, Ghodbunder Road Thane"
                       fill
-                      className="object-cover"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/30 to-transparent lg:bg-gradient-to-t lg:from-black/70 lg:via-black/20 lg:to-transparent" />
                     {/* Badges */}
@@ -254,7 +264,7 @@ export function PremiumFeaturedProperties() {
                       <p className="text-3xl font-bold text-gold leading-tight">₹93 Lakhs</p>
                       <p className="text-xs text-white/60 mt-0.5">All Inclusive · Possession Jun 2027</p>
                     </div>
-                  </div>
+                  </Link>
 
                   {/* Content Side */}
                   <div className="flex flex-col justify-between p-8 lg:p-10 overflow-y-auto max-h-[600px]">
@@ -262,8 +272,10 @@ export function PremiumFeaturedProperties() {
                       <span className="inline-block rounded-full bg-gold/10 border border-gold/30 px-3 py-1 text-xs font-semibold text-gold uppercase tracking-widest mb-4">
                         2 BHK XL Smart Homes
                       </span>
-                      <h3 className="text-3xl font-bold text-foreground leading-tight">
-                        Luxury 2 BHK XL Smart Homes in Thane
+                      <h3 className="text-3xl font-bold text-foreground leading-tight hover:text-gold transition-colors">
+                        <Link href="/properties/raunak-max-city-2bhk">
+                          Luxury 2 BHK XL Smart Homes in Thane
+                        </Link>
                       </h3>
                       <p className="mt-3 text-muted-foreground leading-relaxed">
                         Experience spacious living at <span className="text-foreground font-semibold">Raunak Maximum City</span> with premium amenities, nature-inspired lifestyle spaces, and smart home features.
@@ -329,11 +341,13 @@ export function PremiumFeaturedProperties() {
                         <ArrowRight className="h-4 w-4" />
                       </Button>
                       <Button
-                        onClick={scrollToForm}
+                        asChild
                         variant="outline"
                         className="flex-1 border-gold/50 text-gold hover:bg-gold/10 font-semibold text-sm h-11"
                       >
-                        Download Brochure
+                        <Link href="/properties/raunak-max-city-2bhk">
+                          View Details
+                        </Link>
                       </Button>
                     </div>
                   </div>
@@ -351,61 +365,74 @@ export function PremiumFeaturedProperties() {
               >
                 <div className="grid grid-cols-1 lg:grid-cols-2">
                   {/* Image Side */}
-                  <div className="relative min-h-[360px] lg:min-h-[640px] overflow-hidden">
+                  <Link href="/properties/lodha-sterling" className="relative min-h-[360px] lg:min-h-[640px] overflow-hidden group block">
                     <Image
-                      src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=80"
-                      alt="Raunak Maximum City – Exclusive Jodi Homes, Ghodbunder Road Thane"
+                      src="/images/lodha-sterling/image_1.jpg"
+                      alt="Lodha Sterling – 3 BHK Luxury Residences, Kolshet Road Thane"
                       fill
-                      className="object-cover opacity-70"
+                      className="object-cover opacity-70 transition-transform duration-500 group-hover:scale-105"
                     />
                     <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(15,15,15,0.85) 0%, rgba(15,15,15,0.4) 60%, transparent 100%)" }} />
                     {/* Exclusive badge */}
                     <div className="absolute top-5 left-5 flex flex-wrap gap-2">
-                      <span className="rounded-full px-3 py-1 text-xs font-bold tracking-widest" style={{ background: "linear-gradient(90deg,#b89449,#e8c97a)", color: "#0f0f0f" }}>EXCLUSIVE JODI HOMES</span>
-                      <span className="rounded-full border border-white/20 bg-white/10 backdrop-blur-sm px-3 py-1 text-xs font-semibold text-white">LIMITED INVENTORY</span>
+                      <span className="rounded-full px-3 py-1 text-xs font-bold tracking-widest" style={{ background: "linear-gradient(90deg,#b89449,#e8c97a)", color: "#0f0f0f" }}>READY TO MOVE</span>
+                      <span className="rounded-full border border-white/20 bg-white/10 backdrop-blur-sm px-3 py-1 text-xs font-semibold text-white">RERA APPROVED</span>
                     </div>
-                    {/* Aspirational overlay */}
+                    {/* Price overlay */}
                     <div className="absolute bottom-5 left-5">
-                      <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: "rgba(184,148,73,0.8)" }}>Raunak Maximum City</p>
-                      <p className="text-3xl font-bold text-white leading-tight mt-1">Bigger.<br />Bolder.<br />Better.</p>
-                      <p className="text-xs text-white/50 mt-2">Ghodbunder Road, Thane</p>
+                      <p className="text-xs font-semibold uppercase tracking-widest" style={{ color: "rgba(184,148,73,0.8)" }}>Starting from</p>
+                      <p className="text-3xl font-bold text-white leading-tight mt-1">₹2.40 Cr</p>
+                      <p className="text-xs text-white/50 mt-2">All Inclusive · Possession: Ready</p>
                     </div>
-                  </div>
+                  </Link>
 
                   {/* Content Side */}
                   <div className="flex flex-col justify-between p-8 lg:p-10 overflow-y-auto max-h-[640px]">
                     <div>
                       <span className="inline-block rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-widest mb-4" style={{ background: "rgba(184,148,73,0.12)", border: "1px solid rgba(184,148,73,0.4)", color: "#b89449" }}>
-                        Jodi Apartments &amp; Premium Family Homes
+                        3 BHK Luxury Residences
                       </span>
-                      <h3 className="text-3xl font-bold leading-tight" style={{ color: "#f5f5f0" }}>
-                        Exclusive Jodi Homes Crafted For Bigger Living
+                      <h3 className="text-3xl font-bold leading-tight hover:text-gold transition-colors" style={{ color: "#f5f5f0" }}>
+                        <Link href="/properties/lodha-sterling">
+                          Luxury 3 BHK Homes in Prime Central Thane
+                        </Link>
                       </h3>
                       <p className="mt-3 leading-relaxed" style={{ color: "rgba(245,245,240,0.6)" }}>
-                        Upgrade to expansive family living spaces at <span style={{ color: "#e8c97a", fontWeight: 600 }}>Raunak Maximum City</span> with premium layouts, skyline views, modern smart-home features, and world-class lifestyle amenities.
+                        Experience regal London-inspired living at <span style={{ color: "#e8c97a", fontWeight: 600 }}>Lodha Sterling</span> — a 11-acre green township on Kolshet Road, Thane. Offering spacious 3 BHK residences with world-class amenities and 70% open green spaces.
                       </p>
 
-                      {/* Exclusive Inquiry Banner */}
-                      <div className="mt-5 rounded-xl px-5 py-4" style={{ background: "linear-gradient(90deg, rgba(184,148,73,0.15), rgba(184,148,73,0.05))", border: "1px solid rgba(184,148,73,0.2)" }}>
-                        <p className="text-xs uppercase tracking-widest font-semibold" style={{ color: "#b89449" }}>Pricing on Request</p>
-                        <p className="text-sm mt-1" style={{ color: "rgba(245,245,240,0.7)" }}>Connect with our sales team for an exclusive pricing consultation tailored to your requirements.</p>
+                      {/* Configurations */}
+                      <div className="mt-5 space-y-2">
+                        <p className="text-xs uppercase tracking-wider font-semibold mb-2" style={{ color: "rgba(184,148,73,0.7)" }}>Available Configurations</p>
+                        {lodhaSterlingConfigs.map((cfg, i) => (
+                          <div key={i} className="flex items-center justify-between rounded-lg px-4 py-3" style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}>
+                            <div>
+                              <p className="text-sm font-bold text-foreground" style={{ color: "#f5f5f0" }}>{cfg.area}</p>
+                              <p className="text-xs text-muted-foreground" style={{ color: "rgba(245,245,240,0.5)" }}>{cfg.label}</p>
+                            </div>
+                            <div className="text-right">
+                              <p className="text-sm font-bold text-gold">{cfg.price}</p>
+                              <p className="text-xs text-muted-foreground" style={{ color: "rgba(245,245,240,0.5)" }}>{cfg.note}</p>
+                            </div>
+                          </div>
+                        ))}
                       </div>
 
                       {/* Key Details */}
                       <div className="mt-5 grid grid-cols-2 gap-3">
                         <div className="flex items-center gap-2 rounded-lg px-3 py-2" style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}>
                           <MapPin className="h-4 w-4 shrink-0" style={{ color: "#b89449" }} />
-                          <span className="text-xs font-medium" style={{ color: "rgba(245,245,240,0.85)" }}>Ghodbunder Road, Thane</span>
+                          <span className="text-xs font-medium" style={{ color: "rgba(245,245,240,0.85)" }}>Kolshet Road, Thane West</span>
                         </div>
                         <div className="flex items-center gap-2 rounded-lg px-3 py-2" style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}>
                           <CalendarDays className="h-4 w-4 shrink-0" style={{ color: "#b89449" }} />
-                          <span className="text-xs font-medium" style={{ color: "rgba(245,245,240,0.85)" }}>Possession: Jun 2027</span>
+                          <span className="text-xs font-medium" style={{ color: "rgba(245,245,240,0.85)" }}>Possession: Ready to Move</span>
                         </div>
                       </div>
 
                       {/* Highlights */}
                       <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-y-2.5 gap-x-4">
-                        {jodiHighlights.map((point) => (
+                        {lodhaSterlingHighlights.map((point) => (
                           <div key={point} className="flex items-start gap-2">
                             <CheckCircle2 className="h-4 w-4 mt-0.5 shrink-0" style={{ color: "#b89449" }} />
                             <span className="text-sm" style={{ color: "rgba(245,245,240,0.75)" }}>{point}</span>
@@ -417,7 +444,7 @@ export function PremiumFeaturedProperties() {
                       <div className="mt-5">
                         <p className="text-xs uppercase tracking-wider font-semibold mb-2" style={{ color: "rgba(184,148,73,0.7)" }}>World-Class Amenities</p>
                         <div className="flex flex-wrap gap-2">
-                          {jodiAmenities.map((a) => (
+                          {lodhaSterlingAmenities.map((a) => (
                             <span key={a} className="rounded-full px-3 py-1 text-xs font-medium" style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", color: "rgba(245,245,240,0.75)" }}>{a}</span>
                           ))}
                         </div>
@@ -431,16 +458,18 @@ export function PremiumFeaturedProperties() {
                         className="flex-1 font-semibold text-sm h-12 gap-2 transition-all"
                         style={{ background: "linear-gradient(90deg,#b89449,#e8c97a)", color: "#0f0f0f" }}
                       >
-                        Request Exclusive Pricing
+                        Schedule Site Visit
                         <ArrowRight className="h-4 w-4" />
                       </Button>
                       <Button
-                        onClick={scrollToForm}
+                        asChild
                         variant="outline"
                         className="flex-1 font-semibold text-sm h-12 transition-all hover:bg-white/5"
                         style={{ borderColor: "rgba(184,148,73,0.5)", color: "#b89449" }}
                       >
-                        Talk To Sales Team
+                        <Link href="/properties/lodha-sterling">
+                          View Details
+                        </Link>
                       </Button>
                     </div>
                   </div>

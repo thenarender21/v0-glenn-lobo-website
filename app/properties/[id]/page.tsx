@@ -299,15 +299,20 @@ export default function PropertyDetailPage() {
                 </div>
               )}
 
-              {/* Location Map Placeholder */}
+              {/* Location Map */}
               <div>
                 <h2 className="text-2xl font-semibold mb-6">Location</h2>
-                <div className="relative h-80 w-full overflow-hidden rounded-xl bg-secondary flex items-center justify-center border border-border">
-                  <div className="text-center">
-                    <MapPin className="h-8 w-8 text-gold mx-auto mb-2 opacity-50" />
-                    <p className="text-muted-foreground text-sm font-medium">Map View – {property.location}</p>
-                    <p className="text-muted-foreground/60 text-xs mt-1">Google Maps Embed Placeholder</p>
-                  </div>
+                <div className="h-80 w-full overflow-hidden rounded-xl border border-border bg-secondary relative">
+                  <iframe
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    loading="lazy"
+                    allowFullScreen
+                    referrerPolicy="no-referrer-when-downgrade"
+                    src={`https://maps.google.com/maps?q=${encodeURIComponent(property.location + ", Maharashtra, India")}&t=&z=15&ie=UTF8&iwloc=&output=embed`}
+                    className="absolute inset-0 w-full h-full"
+                  />
                 </div>
               </div>
 
