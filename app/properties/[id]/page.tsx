@@ -304,6 +304,7 @@ export default function PropertyDetailPage() {
                 <h2 className="text-2xl font-semibold mb-6">Location</h2>
                 <div className="h-80 w-full overflow-hidden rounded-xl border border-border bg-secondary relative">
                   <iframe
+                    title="Property Location Map"
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}
