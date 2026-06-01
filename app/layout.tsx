@@ -5,6 +5,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import { GoogleTagManager } from '@next/third-parties/google'
 import { LeadCapturePopup } from '@/components/lead-capture-popup'
 import { PropertiesProvider } from '@/components/properties-provider'
+import { AnalyticsTracker } from '@/components/analytics-tracker'
 import { getProperties } from '@/lib/properties'
 import './globals.css'
 
@@ -47,6 +48,7 @@ export default async function RootLayout({
       )}
       <body className="font-sans antialiased">
         <PropertiesProvider properties={properties}>
+          <AnalyticsTracker />
           {children}
           <LeadCapturePopup />
         </PropertiesProvider>
