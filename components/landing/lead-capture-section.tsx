@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
@@ -15,6 +16,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { CheckCircle2, Loader2, MessageCircle } from "lucide-react"
+import { trackWhatsAppClick, trackFormSubmit } from "@/lib/navigation-helpers"
 
 const landingFormSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -25,6 +27,7 @@ const landingFormSchema = z.object({
 type LandingFormData = z.infer<typeof landingFormSchema>
 
 export function LeadCaptureSection() {
+  const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
 
@@ -77,7 +80,8 @@ export function LeadCaptureSection() {
       setTimeout(() => {
         setIsSuccess(false)
         reset()
-      }, 4000)
+        trackFormSubmit(router, "Landing Page Ads")
+      }, 1500)
     } catch (error) {
       console.error("Error submitting form:", error)
     } finally {
@@ -99,15 +103,13 @@ export function LeadCaptureSection() {
                   Have questions about floor plans, pricing, or availability? Chat with our experts directly on WhatsApp for instant answers.
                 </p>
                 <Button
-                  asChild
                   variant="outline"
                   size="lg"
                   className="w-full border-green-500 bg-green-500/10 text-green-400 hover:bg-green-500 hover:text-white"
+                  onClick={() => trackWhatsAppClick(router, "https://wa.me/917972781688", "Landing Page WhatsApp")}
                 >
-                  <a href="https://wa.me/9107972781688" target="_blank" rel="noopener noreferrer">
-                    <MessageCircle className="mr-2 size-5" />
-                    Chat on WhatsApp
-                  </a>
+                  <MessageCircle className="mr-2 size-5" />
+                  Chat on WhatsApp
                 </Button>
               </div>
               <div className="relative z-10 mt-12">

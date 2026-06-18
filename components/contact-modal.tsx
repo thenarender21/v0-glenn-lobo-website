@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import {
@@ -24,6 +25,7 @@ import {
 import { contactFormSchema, ContactFormData } from "@/lib/form-schema"
 import { useProperties } from "@/components/properties-provider"
 import { CheckCircle2, Loader2 } from "lucide-react"
+import { trackFormSubmit } from "@/lib/navigation-helpers"
 
 interface ContactModalProps {
   open: boolean
@@ -33,6 +35,7 @@ interface ContactModalProps {
 
 export function ContactModal({ open, onOpenChange, source = "Website popup" }: ContactModalProps) {
   const properties = useProperties()
+  const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
 
@@ -88,7 +91,8 @@ export function ContactModal({ open, onOpenChange, source = "Website popup" }: C
         setIsSuccess(false)
         reset()
         onOpenChange(false)
-      }, 2000)
+        trackFormSubmit(router, source)
+      }, 1500)
     } catch (error) {
       console.error("Error submitting form:", error)
     } finally {

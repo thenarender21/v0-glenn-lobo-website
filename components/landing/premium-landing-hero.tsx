@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { motion } from "framer-motion"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -16,6 +17,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Phone, CheckCircle, Loader2, CheckCircle2 } from "lucide-react"
+import { trackCallClick, trackWhatsAppClick, trackFormSubmit } from "@/lib/navigation-helpers"
 
 const heroFormSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -28,6 +30,7 @@ const heroFormSchema = z.object({
 type HeroFormData = z.infer<typeof heroFormSchema>
 
 export function PremiumLandingHero({ onOpenContact }: { onOpenContact?: () => void }) {
+  const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
 
@@ -79,7 +82,8 @@ export function PremiumLandingHero({ onOpenContact }: { onOpenContact?: () => vo
       setTimeout(() => {
         setIsSuccess(false)
         reset()
-      }, 4000)
+        trackFormSubmit(router, "Hero Callback Form")
+      }, 1500)
     } catch (error) {
       console.error("Error submitting hero form:", error)
     } finally {
@@ -142,26 +146,22 @@ export function PremiumLandingHero({ onOpenContact }: { onOpenContact?: () => vo
               
               <div className="flex w-full sm:w-auto gap-3">
                 <Button
-                  asChild
                   variant="outline"
                   size="lg"
                   className="flex-1 border-white/30 bg-transparent px-5 py-6 text-base text-white hover:bg-white/10 hover:text-white sm:flex-initial"
+                  onClick={() => trackCallClick(router, "Premium Hero Call")}
                 >
-                  <a href="tel:07972781688">
-                    <Phone className="mr-2 size-4 text-gold" />
-                    Call Now
-                  </a>
+                  <Phone className="mr-2 size-4 text-gold" />
+                  Call Now
                 </Button>
                 
                 <Button
-                  asChild
                   variant="outline"
                   size="lg"
                   className="flex-1 border-green-500/50 bg-green-500/10 px-5 py-6 text-base text-white hover:bg-green-500/20 sm:flex-initial"
+                  onClick={() => trackWhatsAppClick(router, "https://wa.me/917972781688", "Premium Hero WhatsApp")}
                 >
-                  <a href="https://wa.me/9107972781688" target="_blank" rel="noopener noreferrer">
-                    WhatsApp Now
-                  </a>
+                  WhatsApp Now
                 </Button>
               </div>
             </motion.div>

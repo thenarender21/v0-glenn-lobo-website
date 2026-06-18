@@ -1,10 +1,13 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Phone, CheckCircle } from "lucide-react"
+import { trackCallClick, trackWhatsAppClick } from "@/lib/navigation-helpers"
 
 export function LandingHero() {
+  const router = useRouter()
   const scrollToForm = () => {
     document.getElementById("lead-form")?.scrollIntoView({ behavior: "smooth" })
   }
@@ -54,25 +57,21 @@ export function LandingHero() {
             Book Free Site Visit
           </Button>
           <Button
-            asChild
             variant="outline"
             size="lg"
             className="w-full border-white/30 bg-transparent px-8 py-6 text-base text-white hover:bg-white/10 hover:text-white sm:w-auto"
+            onClick={() => trackCallClick(router, "Landing Hero Call")}
           >
-            <a href="tel:07972781688">
-              <Phone className="mr-2 size-4" />
-              Call Now
-            </a>
+            <Phone className="mr-2 size-4" />
+            Call Now
           </Button>
           <Button
-            asChild
             variant="outline"
             size="lg"
             className="w-full border-green-500/50 bg-green-500/10 px-8 py-6 text-base text-white hover:bg-green-500/20 sm:w-auto"
+            onClick={() => trackWhatsAppClick(router, "https://wa.me/917972781688", "Landing Hero WhatsApp")}
           >
-            <a href="https://wa.me/9107972781688" target="_blank" rel="noopener noreferrer">
-              WhatsApp Now
-            </a>
+            WhatsApp Now
           </Button>
         </motion.div>
 

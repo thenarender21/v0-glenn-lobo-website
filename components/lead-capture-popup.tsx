@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { useRouter } from "next/navigation"
 import {
   Dialog,
   DialogContent,
@@ -19,6 +20,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { CheckCircle2, Loader2, Home } from "lucide-react"
+import { trackFormSubmit } from "@/lib/navigation-helpers"
 
 const locations = [
   "Ghodbunder Road, Thane",
@@ -32,6 +34,7 @@ const locations = [
 ]
 
 export function LeadCapturePopup() {
+  const router = useRouter()
   const [isOpen, setIsOpen] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
@@ -93,7 +96,8 @@ export function LeadCapturePopup() {
       setTimeout(() => {
         setIsSuccess(false)
         handleClose()
-      }, 2000)
+        trackFormSubmit(router, "Lead Capture Popup")
+      }, 1500)
     } catch (error) {
       console.error("Popup submission error:", error)
     } finally {

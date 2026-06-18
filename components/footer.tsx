@@ -1,6 +1,8 @@
 "use client"
 
 import { Mail, Phone, MapPin } from "lucide-react"
+import { useRouter } from "next/navigation"
+import { trackCallClick } from "@/lib/navigation-helpers"
 
 interface FooterProps {
   onOpenContact: () => void
@@ -8,6 +10,7 @@ interface FooterProps {
 
 export function Footer({ onOpenContact }: FooterProps) {
   const currentYear = new Date().getFullYear()
+  const router = useRouter()
 
   return (
     <footer className="bg-background border-t border-border">
@@ -56,7 +59,7 @@ export function Footer({ onOpenContact }: FooterProps) {
               <li>
                 <button
                   onClick={onOpenContact}
-                  className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                  className="text-sm text-muted-foreground transition-colors hover:text-foreground text-left"
                 >
                   Contact
                 </button>
@@ -71,7 +74,12 @@ export function Footer({ onOpenContact }: FooterProps) {
             <ul className="mt-4 space-y-3">
               <li className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Phone className="size-4 text-gold" />
-                <span>07972781688</span>
+                <button
+                  onClick={() => trackCallClick(router, "Footer Phone Link")}
+                  className="transition-colors hover:text-gold text-left font-medium"
+                >
+                  07972781688
+                </button>
               </li>
               <li className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Mail className="size-4 text-gold" />

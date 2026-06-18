@@ -1,6 +1,8 @@
 "use client"
 
 import React, { createContext, useContext, useState, ReactNode } from "react"
+import { useRouter } from "next/navigation"
+import { trackFormSubmit } from "@/lib/navigation-helpers"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
@@ -42,6 +44,7 @@ export function useFloatingCta() {
 }
 
 export function FloatingCtaProvider({ children }: { children: ReactNode }) {
+  const router = useRouter()
   const [isOpen, setIsOpen] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
@@ -104,7 +107,8 @@ export function FloatingCtaProvider({ children }: { children: ReactNode }) {
       setIsSuccess(true)
       setTimeout(() => {
         closeForm()
-      }, 3000)
+        trackFormSubmit(router, "Google Ads - Raunak")
+      }, 1500)
     } catch (error) {
       console.error("Error submitting form:", error)
     } finally {

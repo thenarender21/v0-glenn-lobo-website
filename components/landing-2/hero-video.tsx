@@ -3,9 +3,12 @@
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Phone, CheckCircle, Play } from "lucide-react"
+import { useRouter } from "next/navigation"
 import { useFloatingCta } from "./floating-cta-form"
+import { trackWhatsAppClick } from "@/lib/navigation-helpers"
 
 export function HeroVideo() {
+  const router = useRouter()
   const { openForm } = useFloatingCta()
 
   return (
@@ -68,14 +71,12 @@ export function HeroVideo() {
             Book Site Visit
           </Button>
           <Button
-            asChild
             variant="outline"
             size="lg"
             className="w-full border-green-500/50 bg-green-500/10 px-8 py-7 text-lg text-white transition-all hover:bg-green-500 hover:text-white sm:w-auto"
+            onClick={() => trackWhatsAppClick(router, "https://wa.me/917972781688", "Hero Video WhatsApp")}
           >
-            <a href="https://wa.me/9107972781688" target="_blank" rel="noopener noreferrer">
-              WhatsApp Now
-            </a>
+            WhatsApp Now
           </Button>
         </motion.div>
 

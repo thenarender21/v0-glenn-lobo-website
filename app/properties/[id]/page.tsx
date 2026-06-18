@@ -38,6 +38,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { useToast } from "@/components/ui/use-toast"
+import { trackCallClick, trackWhatsAppClick, trackFormSubmit } from "@/lib/navigation-helpers"
 
 const amenityIcons: Record<string, any> = {
   "Gymnasium": Dumbbell,
@@ -143,6 +144,9 @@ export default function PropertyDetailPage() {
         description: "Mukund Thakur will get back to you shortly.",
       })
       setFormData({ name: "", phone: "", message: property ? `Hi, I am interested in ${property.title} located at ${property.location}.` : "" })
+      setTimeout(() => {
+        trackFormSubmit(router, "Property Page - " + (property ? property.title : "Inquiry"))
+      }, 1000)
     } catch (error) {
       toast({
         title: "Error",
@@ -342,17 +346,13 @@ export default function PropertyDetailPage() {
                   </div>
 
                   <div className="space-y-3 mb-6">
-                    <Button variant="outline" className="w-full justify-start gap-3 hover:border-gold hover:text-gold" asChild>
-                      <a href="tel:07972781688">
-                        <Phone className="h-4 w-4" />
-                        07972781688
-                      </a>
+                    <Button variant="outline" className="w-full justify-start gap-3 hover:border-gold hover:text-gold" onClick={() => trackCallClick(router, "Property Sidebar Call")}>
+                      <Phone className="h-4 w-4" />
+                      07972781688
                     </Button>
-                    <Button className="w-full justify-start gap-3 bg-[#25D366] text-white hover:bg-[#20bd5a]" asChild>
-                      <a href="https://wa.me/917972781688" target="_blank" rel="noreferrer">
-                        <MessageCircle className="h-4 w-4" />
-                        WhatsApp
-                      </a>
+                    <Button className="w-full justify-start gap-3 bg-[#25D366] text-white hover:bg-[#20bd5a]" onClick={() => trackWhatsAppClick(router, "https://wa.me/917972781688", "Property Sidebar WhatsApp")}>
+                      <MessageCircle className="h-4 w-4" />
+                      WhatsApp
                     </Button>
                   </div>
 
@@ -424,17 +424,13 @@ export default function PropertyDetailPage() {
       {/* Mobile Sticky Bottom Bar (visible only below lg breakpoint) */}
       <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-border bg-card p-4 shadow-[0_-10px_40px_rgba(0,0,0,0.2)] lg:hidden">
         <div className="flex gap-3 max-w-7xl mx-auto">
-          <Button variant="outline" className="flex-1 gap-2" asChild>
-            <a href="tel:07972781688">
-              <Phone className="h-4 w-4" />
-              Call
-            </a>
+          <Button variant="outline" className="flex-1 gap-2" onClick={() => trackCallClick(router, "Property Mobile Sticky Call")}>
+            <Phone className="h-4 w-4" />
+            Call
           </Button>
-          <Button className="flex-1 gap-2 bg-[#25D366] text-white hover:bg-[#20bd5a]" asChild>
-            <a href="https://wa.me/917972781688" target="_blank" rel="noreferrer">
-              <MessageCircle className="h-4 w-4" />
-              WhatsApp
-            </a>
+          <Button className="flex-1 gap-2 bg-[#25D366] text-white hover:bg-[#20bd5a]" onClick={() => trackWhatsAppClick(router, "https://wa.me/917972781688", "Property Mobile Sticky WhatsApp")}>
+            <MessageCircle className="h-4 w-4" />
+            WhatsApp
           </Button>
         </div>
       </div>

@@ -3,9 +3,12 @@
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Phone, CalendarCheck } from "lucide-react"
+import { useRouter } from "next/navigation"
 import { useFloatingCta } from "./floating-cta-form"
+import { trackCallClick } from "@/lib/navigation-helpers"
 
 export function FinalCtaSection() {
+  const router = useRouter()
   const { openForm } = useFloatingCta()
 
   return (
@@ -52,15 +55,13 @@ export function FinalCtaSection() {
               Book Site Visit
             </Button>
             <Button
-              asChild
               variant="outline"
               size="lg"
               className="w-full border-white/30 bg-transparent px-8 py-7 text-base text-white hover:bg-white/10 hover:text-white sm:w-auto"
+              onClick={() => trackCallClick(router, "Final CTA Section Call")}
             >
-              <a href="tel:07972781688">
-                <Phone className="mr-2 size-5" />
-                Call Now
-              </a>
+              <Phone className="mr-2 size-5" />
+              Call Now
             </Button>
           </div>
         </motion.div>
