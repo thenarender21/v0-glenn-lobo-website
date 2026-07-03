@@ -80,7 +80,7 @@ export function LeadCaptureSection() {
       setTimeout(() => {
         setIsSuccess(false)
         reset()
-        trackFormSubmit(router, "Landing Page Ads")
+        trackFormSubmit(router, "Landing Page Ads", "site-visit")
       }, 1500)
     } catch (error) {
       console.error("Error submitting form:", error)

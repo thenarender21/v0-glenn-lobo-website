@@ -25,15 +25,16 @@ import {
 import { contactFormSchema, ContactFormData } from "@/lib/form-schema"
 import { useProperties } from "@/components/properties-provider"
 import { CheckCircle2, Loader2 } from "lucide-react"
-import { trackFormSubmit } from "@/lib/navigation-helpers"
+import { trackFormSubmit, ConversionType } from "@/lib/navigation-helpers"
 
 interface ContactModalProps {
   open: boolean
   onOpenChange: (open: boolean) => void
   source?: string
+  conversionType?: ConversionType
 }
 
-export function ContactModal({ open, onOpenChange, source = "Website popup" }: ContactModalProps) {
+export function ContactModal({ open, onOpenChange, source = "Website popup", conversionType = "form" }: ContactModalProps) {
   const properties = useProperties()
   const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -91,7 +92,7 @@ export function ContactModal({ open, onOpenChange, source = "Website popup" }: C
         setIsSuccess(false)
         reset()
         onOpenChange(false)
-        trackFormSubmit(router, source)
+        trackFormSubmit(router, source, conversionType)
       }, 1500)
     } catch (error) {
       console.error("Error submitting form:", error)

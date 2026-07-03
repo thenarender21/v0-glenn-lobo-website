@@ -96,7 +96,7 @@ export function LeadCapturePopup() {
       setTimeout(() => {
         setIsSuccess(false)
         handleClose()
-        trackFormSubmit(router, "Lead Capture Popup")
+        trackFormSubmit(router, "Lead Capture Popup", "popup")
       }, 1500)
     } catch (error) {
       console.error("Popup submission error:", error)

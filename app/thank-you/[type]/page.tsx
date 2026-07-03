@@ -10,7 +10,9 @@ import {
   PhoneCall, 
   ArrowLeft, 
   Home, 
-  ExternalLink 
+  ExternalLink,
+  CalendarCheck,
+  FileText
 } from "lucide-react"
 
 import { Navigation } from "@/components/navigation"
@@ -20,9 +22,7 @@ import { PropertyCard } from "@/components/property-card"
 import { useProperties } from "@/components/properties-provider"
 import { Button } from "@/components/ui/button"
 
-import { PHONE_NUMBER, DEFAULT_WHATSAPP_URL } from "@/lib/navigation-helpers"
-
-type ConversionType = "form" | "whatsapp" | "call"
+import { PHONE_NUMBER, DEFAULT_WHATSAPP_URL, ConversionType } from "@/lib/navigation-helpers"
 
 export default function ThankYouPage() {
   const params = useParams()
@@ -96,6 +96,68 @@ export default function ThankYouPage() {
             <PhoneCall className="size-4" />
           </Button>
         </a>
+      )
+    },
+    "site-visit": {
+      icon: <CalendarCheck className="size-16 text-gold" />,
+      title: "Site Visit Scheduled",
+      subtitle: "Thank you for scheduling a site visit.",
+      description: "Your request has been successfully received. A luxury property advisor will contact you shortly to coordinate the schedule, pick-up arrangements, and specific project viewings.",
+      primaryAction: (
+        <Button 
+          onClick={() => router.push("/properties")} 
+          className="bg-gold text-charcoal hover:bg-gold-light w-full sm:w-auto"
+          size="lg"
+        >
+          View Premium Listings
+        </Button>
+      )
+    },
+    "price-sheet": {
+      icon: <FileText className="size-16 text-gold animate-pulse" />,
+      title: "Cost Sheet Requested",
+      subtitle: "Cost sheets & payment plans are being prepared.",
+      description: "Thank you for your request. The pricing details, floor plans, and current payment schemes are being compiled and will be sent to your phone/WhatsApp shortly.",
+      primaryAction: (
+        <Button 
+          onClick={() => router.push("/properties")} 
+          className="bg-gold text-charcoal hover:bg-gold-light w-full sm:w-auto"
+          size="lg"
+        >
+          Browse All Properties
+        </Button>
+      )
+    },
+    callback: {
+      icon: <PhoneCall className="size-16 text-gold animate-bounce" />,
+      title: "Callback Scheduled",
+      subtitle: "Our advisor will call you shortly.",
+      description: "Your callback request is confirmed. A Thane real estate specialist will dial you within the next 10 minutes to answer any of your questions.",
+      primaryAction: (
+        <a href={`tel:${PHONE_NUMBER}`} className="w-full sm:w-auto">
+          <Button 
+            className="bg-gold text-charcoal hover:bg-gold-light w-full flex items-center justify-center gap-2"
+            size="lg"
+          >
+            Call Now: +91 7972781688
+            <PhoneCall className="size-4" />
+          </Button>
+        </a>
+      )
+    },
+    popup: {
+      icon: <CheckCircle2 className="size-16 text-gold" />,
+      title: "Preferences Registered",
+      subtitle: "Thank you for sharing your search details.",
+      description: "Your preferred location and budget have been recorded. A property expert specializing in these areas will contact you shortly with a curated list of matching residences.",
+      primaryAction: (
+        <Button 
+          onClick={() => router.push("/properties")} 
+          className="bg-gold text-charcoal hover:bg-gold-light w-full sm:w-auto"
+          size="lg"
+        >
+          Browse Properties
+        </Button>
       )
     }
   }

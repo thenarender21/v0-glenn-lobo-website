@@ -82,7 +82,7 @@ export function PremiumLandingHero({ onOpenContact }: { onOpenContact?: () => vo
       setTimeout(() => {
         setIsSuccess(false)
         reset()
-        trackFormSubmit(router, "Hero Callback Form")
+        trackFormSubmit(router, "Hero Callback Form", "callback")
       }, 1500)
     } catch (error) {
       console.error("Error submitting hero form:", error)
