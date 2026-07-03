@@ -44,6 +44,54 @@ const raunakMaxCityAmenities = [
   "Jogging Track", "Heated Kids Pool", "Fitness Center",
 ]
 
+const rutuRichlandConfigs = [
+  { area: "745 Sq.Ft.", label: "RERA Carpet", price: "₹1.15 Cr", note: "Starting Price (All Inclusive)" }
+]
+
+const rutuRichlandHighlights = [
+  "14-acre green township",
+  "Two iconic G+41 storey towers",
+  "Spacious 2 BHK apartments",
+  "745 sq. ft. carpet area",
+  "Starting from ₹1.15 Cr (All Inclusive)",
+  "Private deck with every apartment",
+  "Beautiful panoramic nature views",
+  "20+ premium lifestyle amenities",
+  "Premium construction by Rutu Group"
+]
+
+const rutuRichlandConnectivity = [
+  "Upcoming Metro Stations nearby",
+  "Easy access to Eastern Express Highway",
+  "Direct connectivity via Thane–Borivali Tunnel",
+  "Close to schools, hospitals, banks, shopping centres, restaurants, and business hubs"
+]
+
+const tathastuConfigs = [
+  { area: "558 Sq.Ft.", label: "RERA Carpet", price: "₹79.99 Lakhs++", note: "Deffodil Tower (3rd Tower)" }
+]
+
+const tathastuHighlights = [
+  "4-acre land parcel",
+  "Hill-view residences",
+  "Exclusive boutique-sized apartments",
+  "Vaastu-compliant project",
+  "Highest storey tower in the vicinity",
+  "50+ lifestyle amenities",
+  "Lavish clubhouse",
+  "Ample car parking",
+  "Multi-layer security system",
+  "High-speed elevators",
+  "Premium quality glass windows"
+]
+
+const tathastuConnectivity = [
+  "DG International, Eva World & Euro School",
+  "D-Mart, HyperCity, R Mall & Hiranandani The Walk",
+  "Thane Noble, Sharadadevi & TMC Hospital",
+  "Metro Line 5, Bullet Train & Borivali Tunnel"
+]
+
 const lodhaSterlingConfigs = [
   { area: "968 Sq.Ft.", label: "RERA Carpet", price: "₹2.40 Cr", note: "All Inclusive" },
   { area: "1041 Sq.Ft.", label: "RERA Carpet", price: "₹2.70 Cr", note: "All Inclusive" },
@@ -99,6 +147,8 @@ const propertiesData = {
 
 export function PremiumFeaturedProperties() {
   const [activeTab, setActiveTab] = useState<BHKType>("2BHK")
+  const [active2BHKProperty, setActive2BHKProperty] = useState<"raunak" | "rutu" | "tathastu">("raunak")
+  const [rutuImageIndex, setRutuImageIndex] = useState(0)
 
   const scrollToForm = () => {
     document.getElementById("lead-form")?.scrollIntoView({ behavior: "smooth" })
@@ -243,115 +293,468 @@ export function PremiumFeaturedProperties() {
                 transition={{ duration: 0.4 }}
                 className="overflow-hidden rounded-2xl border border-gold/20 bg-card shadow-xl"
               >
-                <div className="grid grid-cols-1 lg:grid-cols-2">
-                  {/* Image Side */}
-                  <Link href="/properties/raunak-max-city-2bhk" className="relative min-h-[340px] lg:min-h-[600px] overflow-hidden group block">
-                    <Image
-                      src="/images/raunak-max-city-2bhk/image_1.jpg"
-                      alt="Raunak Maximum City – 2 BHK XL Smart Homes, Ghodbunder Road Thane"
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/30 to-transparent lg:bg-gradient-to-t lg:from-black/70 lg:via-black/20 lg:to-transparent" />
-                    {/* Badges */}
-                    <div className="absolute top-5 left-5 flex flex-wrap gap-2">
-                      <span className="rounded-full bg-gold px-3 py-1 text-xs font-bold text-charcoal tracking-wide">PHASE 2 OPEN</span>
-                      <span className="rounded-full bg-emerald-500/90 px-3 py-1 text-xs font-bold text-white tracking-wide">✓ Phase 1 Sold Out</span>
-                    </div>
-                    {/* Price overlay */}
-                    <div className="absolute bottom-5 left-5">
-                      <p className="text-xs font-medium text-white/70 uppercase tracking-wider">Starting from</p>
-                      <p className="text-3xl font-bold text-gold leading-tight">₹93 Lakhs</p>
-                      <p className="text-xs text-white/60 mt-0.5">All Inclusive · Possession Jun 2027</p>
-                    </div>
-                  </Link>
+                {/* Secondary Sub-Tabs for 2BHK Properties */}
+                <div className="flex flex-wrap justify-center border-b border-border/50 bg-muted/20 py-3 px-4 gap-2">
+                  <button
+                    onClick={() => setActive2BHKProperty("raunak")}
+                    className={`rounded-full px-4 py-2 text-xs font-semibold tracking-wide transition-all ${
+                      active2BHKProperty === "raunak"
+                        ? "bg-gold text-charcoal font-bold shadow-sm"
+                        : "bg-transparent text-muted-foreground hover:text-foreground hover:bg-muted/30"
+                    }`}
+                  >
+                    Raunak Maximum City
+                  </button>
+                  <button
+                    onClick={() => setActive2BHKProperty("rutu")}
+                    className={`rounded-full px-4 py-2 text-xs font-semibold tracking-wide transition-all ${
+                      active2BHKProperty === "rutu"
+                        ? "bg-gold text-charcoal font-bold shadow-sm"
+                        : "bg-transparent text-muted-foreground hover:text-foreground hover:bg-muted/30"
+                    }`}
+                  >
+                    Rutu City – Tower Richland
+                  </button>
+                  <button
+                    onClick={() => setActive2BHKProperty("tathastu")}
+                    className={`rounded-full px-4 py-2 text-xs font-semibold tracking-wide transition-all ${
+                      active2BHKProperty === "tathastu"
+                        ? "bg-gold text-charcoal font-bold shadow-sm"
+                        : "bg-transparent text-muted-foreground hover:text-foreground hover:bg-muted/30"
+                    }`}
+                  >
+                    Tathastu Thane
+                  </button>
+                </div>
 
-                  {/* Content Side */}
-                  <div className="flex flex-col justify-between p-8 lg:p-10 overflow-y-auto max-h-[600px]">
-                    <div>
-                      <span className="inline-block rounded-full bg-gold/10 border border-gold/30 px-3 py-1 text-xs font-semibold text-gold uppercase tracking-widest mb-4">
-                        2 BHK XL Smart Homes
-                      </span>
-                      <h3 className="text-3xl font-bold text-foreground leading-tight hover:text-gold transition-colors">
-                        <Link href="/properties/raunak-max-city-2bhk">
-                          Luxury 2 BHK XL Smart Homes in Thane
-                        </Link>
-                      </h3>
-                      <p className="mt-3 text-muted-foreground leading-relaxed">
-                        Experience spacious living at <span className="text-foreground font-semibold">Raunak Maximum City</span> with premium amenities, nature-inspired lifestyle spaces, and smart home features.
-                      </p>
-
-                      {/* Key Details Row */}
-                      <div className="mt-5 grid grid-cols-2 gap-3">
-                        <div className="flex items-center gap-2 rounded-lg bg-muted px-3 py-2">
-                          <MapPin className="h-4 w-4 text-gold shrink-0" />
-                          <span className="text-xs font-medium text-foreground">Ghodbunder Road, Thane</span>
+                <AnimatePresence mode="wait">
+                  {active2BHKProperty === "raunak" ? (
+                    <motion.div
+                      key="raunak"
+                      initial={{ opacity: 0, x: -15 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: 15 }}
+                      transition={{ duration: 0.3 }}
+                      className="grid grid-cols-1 lg:grid-cols-2"
+                    >
+                      {/* Image Side */}
+                      <Link href="/properties/raunak-max-city-2bhk" className="relative min-h-[340px] lg:min-h-[600px] overflow-hidden group block">
+                        <Image
+                          src="/images/raunak-max-city-2bhk/image_1.jpg"
+                          alt="Raunak Maximum City – 2 BHK XL Smart Homes, Ghodbunder Road Thane"
+                          fill
+                          className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/30 to-transparent lg:bg-gradient-to-t lg:from-black/70 lg:via-black/20 lg:to-transparent" />
+                        {/* Badges */}
+                        <div className="absolute top-5 left-5 flex flex-wrap gap-2">
+                          <span className="rounded-full bg-gold px-3 py-1 text-xs font-bold text-charcoal tracking-wide">PHASE 2 OPEN</span>
+                          <span className="rounded-full bg-emerald-500/90 px-3 py-1 text-xs font-bold text-white tracking-wide">✓ Phase 1 Sold Out</span>
                         </div>
-                        <div className="flex items-center gap-2 rounded-lg bg-muted px-3 py-2">
-                          <CalendarDays className="h-4 w-4 text-gold shrink-0" />
-                          <span className="text-xs font-medium text-foreground">Possession: Jun 2027</span>
+                        {/* Price overlay */}
+                        <div className="absolute bottom-5 left-5">
+                          <p className="text-xs font-medium text-white/70 uppercase tracking-wider">Starting from</p>
+                          <p className="text-3xl font-bold text-gold leading-tight">₹93 Lakhs</p>
+                          <p className="text-xs text-white/60 mt-0.5">All Inclusive · Possession Jun 2027</p>
                         </div>
-                      </div>
+                      </Link>
 
-                      {/* Configurations */}
-                      <div className="mt-5 space-y-2">
-                        <p className="text-xs text-muted-foreground uppercase tracking-wider font-semibold mb-2">Available Configurations</p>
-                        {raunakMaxCityConfigs.map((cfg, i) => (
-                          <div key={i} className="flex items-center justify-between rounded-lg border border-border bg-background px-4 py-3">
-                            <div>
-                              <p className="text-sm font-bold text-foreground">{cfg.area}</p>
-                              <p className="text-xs text-muted-foreground">{cfg.label}</p>
+                      {/* Content Side */}
+                      <div className="flex flex-col justify-between p-8 lg:p-10 overflow-y-auto max-h-[600px]">
+                        <div>
+                          <span className="inline-block rounded-full bg-gold/10 border border-gold/30 px-3 py-1 text-xs font-semibold text-gold uppercase tracking-widest mb-4">
+                            2 BHK XL Smart Homes
+                          </span>
+                          <h3 className="text-3xl font-bold text-foreground leading-tight hover:text-gold transition-colors">
+                            <Link href="/properties/raunak-max-city-2bhk">
+                              Luxury 2 BHK XL Smart Homes in Thane
+                            </Link>
+                          </h3>
+                          <p className="mt-3 text-muted-foreground leading-relaxed">
+                            Experience spacious living at <span className="text-foreground font-semibold">Raunak Maximum City</span> with premium amenities, nature-inspired lifestyle spaces, and smart home features.
+                          </p>
+
+                          {/* Key Details Row */}
+                          <div className="mt-5 grid grid-cols-2 gap-3">
+                            <div className="flex items-center gap-2 rounded-lg bg-muted px-3 py-2">
+                              <MapPin className="h-4 w-4 text-gold shrink-0" />
+                              <span className="text-xs font-medium text-foreground">Ghodbunder Road, Thane</span>
                             </div>
-                            <div className="text-right">
-                              <p className="text-sm font-bold text-gold">{cfg.price}</p>
-                              <p className="text-xs text-muted-foreground">{cfg.note}</p>
+                            <div className="flex items-center gap-2 rounded-lg bg-muted px-3 py-2">
+                              <CalendarDays className="h-4 w-4 text-gold shrink-0" />
+                              <span className="text-xs font-medium text-foreground">Possession: Jun 2027</span>
                             </div>
                           </div>
-                        ))}
-                      </div>
 
-                      {/* Highlights */}
-                      <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-4">
-                        {raunakMaxCityHighlights.map((point) => (
-                          <div key={point} className="flex items-start gap-2">
-                            <CheckCircle2 className="h-4 w-4 text-gold mt-0.5 shrink-0" />
-                            <span className="text-sm text-foreground/80">{point}</span>
+                          {/* Configurations */}
+                          <div className="mt-5 space-y-2">
+                            <p className="text-xs text-muted-foreground uppercase tracking-wider font-semibold mb-2">Available Configurations</p>
+                            {raunakMaxCityConfigs.map((cfg, i) => (
+                              <div key={i} className="flex items-center justify-between rounded-lg border border-border bg-background px-4 py-3">
+                                <div>
+                                  <p className="text-sm font-bold text-foreground">{cfg.area}</p>
+                                  <p className="text-xs text-muted-foreground">{cfg.label}</p>
+                                </div>
+                                <div className="text-right">
+                                  <p className="text-sm font-bold text-gold">{cfg.price}</p>
+                                  <p className="text-xs text-muted-foreground">{cfg.note}</p>
+                                </div>
+                              </div>
+                            ))}
                           </div>
-                        ))}
-                      </div>
 
-                      {/* Amenities chips */}
-                      <div className="mt-5">
-                        <p className="text-xs text-muted-foreground uppercase tracking-wider font-semibold mb-2">Lifestyle Amenities</p>
-                        <div className="flex flex-wrap gap-2">
-                          {raunakMaxCityAmenities.map((a) => (
-                            <span key={a} className="rounded-full bg-muted border border-border px-3 py-1 text-xs font-medium text-foreground/80">{a}</span>
+                          {/* Highlights */}
+                          <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-4">
+                            {raunakMaxCityHighlights.map((point) => (
+                              <div key={point} className="flex items-start gap-2">
+                                <CheckCircle2 className="h-4 w-4 text-gold mt-0.5 shrink-0" />
+                                <span className="text-sm text-foreground/80">{point}</span>
+                              </div>
+                            ))}
+                          </div>
+
+                          {/* Amenities chips */}
+                          <div className="mt-5">
+                            <p className="text-xs text-muted-foreground uppercase tracking-wider font-semibold mb-2">Lifestyle Amenities</p>
+                            <div className="flex flex-wrap gap-2">
+                              {raunakMaxCityAmenities.map((a) => (
+                                <span key={a} className="rounded-full bg-muted border border-border px-3 py-1 text-xs font-medium text-foreground/80">{a}</span>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* CTAs */}
+                        <div className="mt-8 flex flex-col sm:flex-row gap-3">
+                          <Button
+                            onClick={scrollToForm}
+                            className="flex-1 bg-gold text-charcoal hover:bg-gold/90 font-semibold text-sm h-11 gap-2"
+                          >
+                            Schedule Site Visit
+                            <ArrowRight className="h-4 w-4" />
+                          </Button>
+                          <Button
+                            asChild
+                            variant="outline"
+                            className="flex-1 border-gold/50 text-gold hover:bg-gold/10 font-semibold text-sm h-11"
+                          >
+                            <Link href="/properties/raunak-max-city-2bhk">
+                              View Details
+                            </Link>
+                          </Button>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ) : active2BHKProperty === "rutu" ? (
+                    <motion.div
+                      key="rutu"
+                      initial={{ opacity: 0, x: 15 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -15 }}
+                      transition={{ duration: 0.3 }}
+                      className="grid grid-cols-1 lg:grid-cols-2"
+                    >
+                      {/* Image Side */}
+                      <div className="relative min-h-[340px] lg:min-h-[600px] overflow-hidden group">
+                        <AnimatePresence mode="wait">
+                          <motion.div
+                            key={rutuImageIndex}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.3 }}
+                            className="absolute inset-0"
+                          >
+                            <Image
+                              src={`/images/rutu-city/image_${rutuImageIndex + 1}.jpg`}
+                              alt={`Rutu City – Tower Richland - View ${rutuImageIndex + 1}`}
+                              fill
+                              className="object-cover"
+                            />
+                          </motion.div>
+                        </AnimatePresence>
+                        <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/30 to-transparent lg:bg-gradient-to-t lg:from-black/70 lg:via-black/20 lg:to-transparent pointer-events-none" />
+                        {/* Badges */}
+                        <div className="absolute top-5 left-5 flex flex-wrap gap-2 pointer-events-none">
+                          <span className="rounded-full bg-gold px-3 py-1 text-xs font-bold text-charcoal tracking-wide">LAUNCH OFFER</span>
+                          <span className="rounded-full bg-white/15 backdrop-blur-sm border border-white/30 px-3 py-1 text-xs font-semibold text-white">RERA APPROVED</span>
+                        </div>
+                        {/* Price overlay */}
+                        <div className="absolute bottom-5 left-5 pointer-events-none">
+                          <p className="text-xs font-medium text-white/70 uppercase tracking-wider">Starting from</p>
+                          <p className="text-3xl font-bold text-gold leading-tight">₹1.15 Cr</p>
+                          <p className="text-xs text-white/60 mt-0.5">All Inclusive · G+41 Storey Tower</p>
+                        </div>
+
+                        {/* Navigation Arrows */}
+                        <button
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setRutuImageIndex((prev) => (prev === 0 ? 5 : prev - 1));
+                          }}
+                          className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full bg-black/45 hover:bg-black/70 text-white size-8 flex items-center justify-center font-bold opacity-0 group-hover:opacity-100 transition-opacity z-10"
+                        >
+                          ←
+                        </button>
+                        <button
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setRutuImageIndex((prev) => (prev === 5 ? 0 : prev + 1));
+                          }}
+                          className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-black/45 hover:bg-black/70 text-white size-8 flex items-center justify-center font-bold opacity-0 group-hover:opacity-100 transition-opacity z-10"
+                        >
+                          →
+                        </button>
+
+                        {/* Pagination Dots */}
+                        <div className="absolute bottom-5 right-5 flex gap-1.5 z-10">
+                          {Array.from({ length: 6 }).map((_, i) => (
+                            <button
+                              key={i}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                setRutuImageIndex(i);
+                              }}
+                              className={`size-2 rounded-full transition-all ${
+                                rutuImageIndex === i ? "bg-gold w-4" : "bg-white/50 hover:bg-white"
+                              }`}
+                            />
                           ))}
                         </div>
                       </div>
-                    </div>
 
-                    {/* CTAs */}
-                    <div className="mt-8 flex flex-col sm:flex-row gap-3">
-                      <Button
-                        onClick={scrollToForm}
-                        className="flex-1 bg-gold text-charcoal hover:bg-gold/90 font-semibold text-sm h-11 gap-2"
-                      >
-                        Schedule Site Visit
-                        <ArrowRight className="h-4 w-4" />
-                      </Button>
-                      <Button
-                        asChild
-                        variant="outline"
-                        className="flex-1 border-gold/50 text-gold hover:bg-gold/10 font-semibold text-sm h-11"
-                      >
-                        <Link href="/properties/raunak-max-city-2bhk">
-                          View Details
-                        </Link>
-                      </Button>
-                    </div>
-                  </div>
-                </div>
+                      {/* Content Side */}
+                      <div className="flex flex-col justify-between p-8 lg:p-10 overflow-y-auto max-h-[600px]">
+                        <div>
+                          <span className="inline-block rounded-full bg-gold/10 border border-gold/30 px-3 py-1 text-xs font-semibold text-gold uppercase tracking-widest mb-4">
+                            2 BHK Premium Residences
+                          </span>
+                          
+                          {/* Limited Time Launch Offer Highlight Banner */}
+                          <div className="mb-5 rounded-xl border border-gold/30 bg-gold/5 p-4">
+                            <p className="text-xs font-bold text-gold uppercase tracking-widest">Limited Time Launch Offer</p>
+                            <p className="text-sm text-foreground/90 mt-1 font-medium">Exclusive offers available for the first 50 buyers.</p>
+                          </div>
+
+                          <h3 className="text-3xl font-bold text-foreground leading-tight hover:text-gold transition-colors">
+                            Rutu City – Tower Richland
+                          </h3>
+                          <p className="text-xs text-muted-foreground mt-1">Developed by Rutu Group</p>
+                          
+                          <p className="mt-3 text-muted-foreground leading-relaxed">
+                            A premium residential project spread across 14 acres of lush greenery, offering a perfect balance of nature, luxury, and city connectivity. Features two iconic G+41-storey towers with panoramic views and thoughtfully designed homes.
+                          </p>
+
+                          {/* Key Details Row with Google Maps Link */}
+                          <div className="mt-5 grid grid-cols-2 gap-3">
+                            <a 
+                              href="https://maps.app.goo.gl/H4eDmcyX12uvaCSd7"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center gap-2 rounded-lg bg-muted px-3 py-2 hover:bg-muted/80 transition-colors group/link"
+                            >
+                              <MapPin className="h-4 w-4 text-gold shrink-0 transition-transform group-hover/link:scale-110" />
+                              <span className="text-xs font-semibold text-foreground underline decoration-gold/50 decoration-dotted underline-offset-2">Ghodbunder Road, Thane</span>
+                            </a>
+                            <div className="flex items-center gap-2 rounded-lg bg-muted px-3 py-2">
+                              <CalendarDays className="h-4 w-4 text-gold shrink-0" />
+                              <span className="text-xs font-medium text-foreground">Possession: Dec 2028</span>
+                            </div>
+                          </div>
+
+                          {/* Configurations */}
+                          <div className="mt-5 space-y-2">
+                            <p className="text-xs text-muted-foreground uppercase tracking-wider font-semibold mb-2">Available Configurations</p>
+                            {rutuRichlandConfigs.map((cfg, i) => (
+                              <div key={i} className="flex items-center justify-between rounded-lg border border-border bg-background px-4 py-3">
+                                <div>
+                                  <p className="text-sm font-bold text-foreground">{cfg.area}</p>
+                                  <p className="text-xs text-muted-foreground">{cfg.label}</p>
+                                </div>
+                                <div className="text-right">
+                                  <p className="text-sm font-bold text-gold">{cfg.price}</p>
+                                  <p className="text-xs text-muted-foreground">{cfg.note}</p>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+
+                          {/* Highlights */}
+                          <div className="mt-5 space-y-2">
+                            <p className="text-xs text-muted-foreground uppercase tracking-wider font-semibold">Key Highlights</p>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-4">
+                              {rutuRichlandHighlights.map((point) => (
+                                <div key={point} className="flex items-start gap-2">
+                                  <CheckCircle2 className="h-4 w-4 text-gold mt-0.5 shrink-0" />
+                                  <span className="text-sm text-foreground/80">{point}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* Connectivity Advantages */}
+                          <div className="mt-5">
+                            <p className="text-xs text-muted-foreground uppercase tracking-wider font-semibold mb-2">Location & Connectivity</p>
+                            <div className="flex flex-wrap gap-2">
+                              {rutuRichlandConnectivity.map((c) => (
+                                <span key={c} className="rounded-full bg-muted border border-border px-3 py-1 text-xs font-medium text-foreground/80">{c}</span>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* CTAs */}
+                        <div className="mt-8 flex flex-col sm:flex-row gap-3">
+                          <Button
+                            onClick={scrollToForm}
+                            className="flex-1 bg-gold text-charcoal hover:bg-gold/90 font-semibold text-sm h-11 gap-2"
+                          >
+                            Book a Free Site Visit
+                            <ArrowRight className="h-4 w-4" />
+                          </Button>
+                          <Button
+                            onClick={scrollToForm}
+                            variant="outline"
+                            className="flex-1 border-gold/50 text-gold hover:bg-gold/10 font-semibold text-sm h-11"
+                          >
+                            Get Price Sheet
+                          </Button>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key="tathastu"
+                      initial={{ opacity: 0, x: 15 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -15 }}
+                      transition={{ duration: 0.3 }}
+                      className="grid grid-cols-1 lg:grid-cols-2"
+                    >
+                      {/* Video Side */}
+                      <div className="relative min-h-[340px] lg:min-h-[600px] overflow-hidden group">
+                        <video
+                          autoPlay
+                          muted
+                          loop
+                          playsInline
+                          className="absolute inset-0 w-full h-full object-cover"
+                        >
+                          <source src="/videos/tathastu/property.mp4" type="video/mp4" />
+                        </video>
+                        <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/30 to-transparent lg:bg-gradient-to-t lg:from-black/70 lg:via-black/20 lg:to-transparent pointer-events-none" />
+                        {/* Badges */}
+                        <div className="absolute top-5 left-5 flex flex-wrap gap-2 pointer-events-none">
+                          <span className="rounded-full bg-gold px-3 py-1 text-xs font-bold text-charcoal tracking-wide">HILL-VIEW RESIDENCES</span>
+                          <span className="rounded-full bg-white/15 backdrop-blur-sm border border-white/30 px-3 py-1 text-xs font-semibold text-white">RERA APPROVED</span>
+                          <span className="rounded-full bg-black/50 backdrop-blur-sm border border-white/20 px-3 py-1 text-xs font-semibold text-white flex items-center gap-1">
+                            <span className="size-1.5 rounded-full bg-red-500 animate-pulse inline-block" />
+                            LIVE TOUR
+                          </span>
+                        </div>
+                        {/* Price overlay */}
+                        <div className="absolute bottom-5 left-5 pointer-events-none">
+                          <p className="text-xs font-medium text-white/70 uppercase tracking-wider">Starting from</p>
+                          <p className="text-3xl font-bold text-gold leading-tight">₹79.99 Lakhs++</p>
+                          <p className="text-xs text-white/60 mt-0.5">onwards · Possession Dec 2027</p>
+                        </div>
+                      </div>
+
+                      {/* Content Side */}
+                      <div className="flex flex-col justify-between p-8 lg:p-10 overflow-y-auto max-h-[600px]">
+                        <div>
+                          <span className="inline-block rounded-full bg-gold/10 border border-gold/30 px-3 py-1 text-xs font-semibold text-gold uppercase tracking-widest mb-4">
+                            2 BHK Premium Hill-View
+                          </span>
+                          <h3 className="text-3xl font-bold text-foreground leading-tight hover:text-gold transition-colors">
+                            Tathastu Thane
+                          </h3>
+                          <p className="text-xs text-muted-foreground mt-1 font-medium text-gold">Deffodil Tower (3rd Tower)</p>
+                          
+                          <p className="mt-3 text-muted-foreground leading-relaxed">
+                            Experience premium hill-view residences at Tathastu Thane, offering thoughtfully designed homes with private sun-deck living, modern amenities, and excellent connectivity on Ghodbunder Road. The project combines nature, convenience, and contemporary lifestyle in one of Thane&apos;s fastest-growing locations.
+                          </p>
+
+                          {/* Key Details Row */}
+                          <div className="mt-5 grid grid-cols-2 gap-3">
+                            <div className="flex items-center gap-2 rounded-lg bg-muted px-3 py-2">
+                              <MapPin className="h-4 w-4 text-gold shrink-0" />
+                              <span className="text-xs font-medium text-foreground">Ghodbunder Road, Thane</span>
+                            </div>
+                            <div className="flex items-center gap-2 rounded-lg bg-muted px-3 py-2">
+                              <CalendarDays className="h-4 w-4 text-gold shrink-0" />
+                              <span className="text-xs font-medium text-foreground">Possession: Dec 2027</span>
+                            </div>
+                          </div>
+
+                          {/* Configurations */}
+                          <div className="mt-5 space-y-2">
+                            <p className="text-xs text-muted-foreground uppercase tracking-wider font-semibold mb-2">Available Configurations</p>
+                            {tathastuConfigs.map((cfg, i) => (
+                              <div key={i} className="flex items-center justify-between rounded-lg border border-border bg-background px-4 py-3">
+                                <div>
+                                  <p className="text-sm font-bold text-foreground">{cfg.area}</p>
+                                  <p className="text-xs text-muted-foreground">{cfg.label}</p>
+                                </div>
+                                <div className="text-right">
+                                  <p className="text-sm font-bold text-gold">{cfg.price}</p>
+                                  <p className="text-xs text-muted-foreground">{cfg.note}</p>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+
+                          {/* Tower specifications */}
+                          <div className="mt-4 rounded-lg border border-border bg-background px-4 py-3">
+                            <p className="text-xs text-muted-foreground uppercase tracking-wider font-semibold">Tower Specifications</p>
+                            <p className="text-sm font-medium text-foreground mt-1">36 Storey Residential Tower with 5 High-Speed Lifts</p>
+                          </div>
+
+                          {/* Highlights */}
+                          <div className="mt-5 space-y-2">
+                            <p className="text-xs text-muted-foreground uppercase tracking-wider font-semibold">Key Highlights</p>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-4">
+                              {tathastuHighlights.map((point) => (
+                                <div key={point} className="flex items-start gap-2">
+                                  <CheckCircle2 className="h-4 w-4 text-gold mt-0.5 shrink-0" />
+                                  <span className="text-sm text-foreground/80">{point}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* Location & Connectivity Advantages */}
+                          <div className="mt-5">
+                            <p className="text-xs text-muted-foreground uppercase tracking-wider font-semibold mb-2">Location & Connectivity</p>
+                            <div className="flex flex-wrap gap-2">
+                              {tathastuConnectivity.map((c) => (
+                                <span key={c} className="rounded-full bg-muted border border-border px-3 py-1 text-xs font-medium text-foreground/80">{c}</span>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* CTAs */}
+                        <div className="mt-8 flex flex-col sm:flex-row gap-3">
+                          <Button
+                            onClick={scrollToForm}
+                            className="flex-1 bg-gold text-charcoal hover:bg-gold/90 font-semibold text-sm h-11 gap-2"
+                          >
+                            Book a Free Site Visit
+                            <ArrowRight className="h-4 w-4" />
+                          </Button>
+                          <Button
+                            onClick={scrollToForm}
+                            variant="outline"
+                            className="flex-1 border-gold/50 text-gold hover:bg-gold/10 font-semibold text-sm h-11"
+                          >
+                            Get Price Sheet
+                          </Button>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </motion.div>
             ) : (
               <motion.div
