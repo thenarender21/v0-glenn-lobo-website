@@ -1,4 +1,6 @@
 import { fetchPropertiesFromSheet } from './google-sheets';
+import { prisma } from './db';
+
 
 export type PropertyType = "1 BHK" | "2 BHK" | "3 BHK"
 export type PropertyStatus = "Rent" | "Sell"
@@ -251,7 +253,43 @@ export const premiumApartmentProperties: Property[] = [
   }
 ]
 
+function mapDbProperty(dbProp: any): Property {
+  return {
+    id: dbProp.id,
+    title: dbProp.title,
+    type: dbProp.bhkType as PropertyType,
+    status: dbProp.status as PropertyStatus,
+    price: dbProp.priceStr,
+    location: dbProp.location,
+    image: dbProp.image,
+    description: dbProp.description,
+    beds: dbProp.beds,
+    baths: dbProp.baths,
+    sqft: dbProp.sqft,
+    floor: dbProp.floor,
+    age: dbProp.age,
+    gallery: typeof dbProp.gallery === 'string' ? JSON.parse(dbProp.gallery) : dbProp.gallery || [],
+    amenities: typeof dbProp.amenities === 'string' ? JSON.parse(dbProp.amenities) : dbProp.amenities || [],
+  };
+}
+
 export async function getProperties(): Promise<Property[]> {
+  try {
+    const dbProps = await prisma.property.findMany({
+      orderBy: { createdAt: 'desc' }
+    });
+
+    if (dbProps.length > 0) {
+      // Map DB schema to frontend structure. Use 'slug' as the public ID so links match slugs
+      return dbProps.map(dbProp => ({
+        ...mapDbProperty(dbProp),
+        id: dbProp.slug // Ensure dynamic pages match using /properties/[slug]
+      }));
+    }
+  } catch (error) {
+    console.error("Failed to fetch database properties, falling back to static lists", error);
+  }
+
   let list: Property[] = []
   try {
      const fetchedProperties = await fetchPropertiesFromSheet();
@@ -274,4 +312,5 @@ export async function getProperties(): Promise<Property[]> {
   });
   return uniqueList;
 }
+
 
