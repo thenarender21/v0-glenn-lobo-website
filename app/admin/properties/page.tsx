@@ -138,7 +138,9 @@ export default function AdminPropertiesPage() {
                       <div className="font-semibold text-foreground flex items-center gap-1.5">
                         {property.title}
                         {property.featured && (
-                          <Star className="h-3.5 w-3.5 fill-gold text-gold" title="Featured" />
+                          <span title="Featured">
+                            <Star className="h-3.5 w-3.5 fill-gold text-gold" />
+                          </span>
                         )}
                       </div>
                       <div className="text-xs text-muted-foreground font-mono">/{property.slug}</div>
