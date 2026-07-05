@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import { GoogleAnalytics } from '@next/third-parties/google'
 import { LeadCapturePopup } from '@/components/lead-capture-popup'
 import { PropertiesProvider } from '@/components/properties-provider'
 import { getProperties } from '@/lib/properties'
@@ -50,6 +51,7 @@ export default async function RootLayout({
         </PropertiesProvider>
         <Analytics />
         <SpeedInsights />
+        <GoogleAnalytics gaId="G-5Z0B4JJ70B" />
       </body>
     </html>
   )
