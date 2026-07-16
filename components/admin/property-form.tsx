@@ -448,7 +448,7 @@ export function PropertyForm({ initialData, onSubmit, submitLabel }: PropertyFor
                   </button>
                 </div>
               ))}
-              <div className="flex h-20 w-28 flex-col items-center justify-center rounded border-2 border-dashed border-border bg-muted/20 text-center cursor-pointer hover:bg-muted/40 transition-colors">
+              <div className="relative flex h-20 w-28 flex-col items-center justify-center rounded border-2 border-dashed border-border bg-muted/20 text-center cursor-pointer hover:bg-muted/40 transition-colors">
                 <Upload className="h-4 w-4 text-muted-foreground mb-1" />
                 <span className="text-[10px] text-muted-foreground">Add photo</span>
                 <input

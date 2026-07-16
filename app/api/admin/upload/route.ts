@@ -2,9 +2,21 @@ import { NextResponse } from 'next/server'
 import { writeFile, mkdir } from 'fs/promises'
 import { join } from 'path'
 import { existsSync } from 'fs'
+import { verifySessionToken } from '@/lib/auth'
+import { cookies } from 'next/headers'
+
+async function checkAuth() {
+  const cookieStore = await cookies()
+  const sessionCookie = cookieStore.get('admin_session')?.value
+  return await verifySessionToken(sessionCookie)
+}
 
 export async function POST(request: Request) {
   try {
+    const session = await checkAuth()
+    if (!session) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
     const formData = await request.formData()
     const file = formData.get('file') as File | null
 

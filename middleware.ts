@@ -5,7 +5,7 @@ import { verifySessionToken } from './lib/auth'
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
-  // Only protect routes under /admin, except /admin/login
+  // 1. Protect page routes under /admin, except /admin/login
   if (pathname.startsWith('/admin') && pathname !== '/admin/login') {
     const sessionCookie = request.cookies.get('admin_session')?.value
     const session = await verifySessionToken(sessionCookie)
@@ -17,9 +17,23 @@ export async function middleware(request: NextRequest) {
     }
   }
 
+  // 2. Protect API routes under /api/admin, except login/logout
+  if (
+    pathname.startsWith('/api/admin') &&
+    pathname !== '/api/admin/auth/login' &&
+    pathname !== '/api/admin/auth/logout'
+  ) {
+    const sessionCookie = request.cookies.get('admin_session')?.value
+    const session = await verifySessionToken(sessionCookie)
+
+    if (!session) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+  }
+
   return NextResponse.next()
 }
 
 export const config = {
-  matcher: ['/admin/:path*'],
+  matcher: ['/admin/:path*', '/api/admin/:path*'],
 }

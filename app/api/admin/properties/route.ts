@@ -12,6 +12,11 @@ async function checkAuth() {
 
 export async function GET() {
   try {
+    const session = await checkAuth()
+    if (!session) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
     const properties = await prisma.property.findMany({
       orderBy: { createdAt: 'desc' },
     })
