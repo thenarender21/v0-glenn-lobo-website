@@ -20,4 +20,7 @@ node_modules/
 .env
 .env.local
 *.db
-*.db-journal
+*.db-journal
+
+# Local uploads
+public/uploads/
