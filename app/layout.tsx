@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
-import { GoogleAnalytics } from '@next/third-parties/google'
+import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google'
 import { LeadCapturePopup } from '@/components/lead-capture-popup'
 import { PropertiesProvider } from '@/components/properties-provider'
 import { getProperties } from '@/lib/properties'
@@ -45,6 +45,15 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className="font-sans antialiased">
+        {/* Google Tag Manager (noscript) */}
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-N9T7N3D7"
+            height="0"
+            width="0"
+            style={{ display: 'none', visibility: 'hidden' }}
+          />
+        </noscript>
         <PropertiesProvider properties={properties}>
           {children}
           <LeadCapturePopup />
@@ -52,6 +61,7 @@ export default async function RootLayout({
         <Analytics />
         <SpeedInsights />
         <GoogleAnalytics gaId="G-5Z0B4JJ70B" />
+        <GoogleTagManager gtmId="GTM-N9T7N3D7" />
       </body>
     </html>
   )
