@@ -116,6 +116,26 @@ const lodhaSterlingAmenities = [
   "Kids Play Area", "Indoor Games", "Multipurpose Lawn", "Jogging Track"
 ]
 
+const rutuNewConfigs = [
+  { area: "696 Sq.Ft.", label: "RERA Carpet (734 Sq.Ft. Usable)", price: "₹99 Lakhs++", note: "Starting Price" },
+  { area: "705 Sq.Ft.", label: "RERA Carpet (745 Sq.Ft. Usable)", price: "starting ₹99 Lakhs++", note: "Premium View" },
+]
+
+const rutuNewHighlights = [
+  "14-Acre Premium Land Parcel",
+  "Iconic 42-Storey Hillside Tower",
+  "40,000+ Sq.Ft. Landscaped Podium",
+  "15,000+ Sq.Ft. Recreational Garden",
+  "50+ Lifestyle Amenities",
+  "Show Flat Ready",
+]
+
+const rutuNewPaymentPlans = [
+  "20:80 Builder Subvention Plan",
+  "25*4 Bullet Payment Plan",
+]
+
+
 const propertiesData = {
   "1BHK": [] as any[],
   "2BHK": [] as any[],
@@ -147,7 +167,7 @@ const propertiesData = {
 
 export function PremiumFeaturedProperties() {
   const [activeTab, setActiveTab] = useState<BHKType>("2BHK")
-  const [active2BHKProperty, setActive2BHKProperty] = useState<"raunak" | "rutu" | "tathastu">("raunak")
+  const [active2BHKProperty, setActive2BHKProperty] = useState<"raunak" | "rutu" | "tathastu" | "rutu-new">("raunak")
   const [rutuImageIndex, setRutuImageIndex] = useState(0)
 
   const scrollToForm = () => {
@@ -325,6 +345,16 @@ export function PremiumFeaturedProperties() {
                   >
                     Tathastu Thane
                   </button>
+                  <button
+                    onClick={() => setActive2BHKProperty("rutu-new")}
+                    className={`rounded-full px-4 py-2 text-xs font-semibold tracking-wide transition-all ${
+                      active2BHKProperty === "rutu-new"
+                        ? "bg-gold text-charcoal font-bold shadow-sm"
+                        : "bg-transparent text-muted-foreground hover:text-foreground hover:bg-muted/30"
+                    }`}
+                  >
+                    Rutu City
+                  </button>
                 </div>
 
                 <AnimatePresence mode="wait">
@@ -439,6 +469,132 @@ export function PremiumFeaturedProperties() {
                             className="flex-1 border-gold/50 text-gold hover:bg-gold/10 font-semibold text-sm h-11"
                           >
                             <Link href="/properties/raunak-max-city-2bhk">
+                              View Details
+                            </Link>
+                          </Button>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ) : active2BHKProperty === "rutu-new" ? (
+                    <motion.div
+                      key="rutu-new"
+                      initial={{ opacity: 0, x: -15 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: 15 }}
+                      transition={{ duration: 0.3 }}
+                      className="grid grid-cols-1 lg:grid-cols-2"
+                    >
+                      {/* Image Side */}
+                      <Link href="/properties/rutu-city-2bhk" className="relative min-h-[340px] lg:min-h-[600px] overflow-hidden group block">
+                        <Image
+                          src="/images/rutu-city-2bhk/image_3.jpg"
+                          alt="Rutu City – Premium 2 BHK Hillside Residences, Thane"
+                          fill
+                          className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/30 to-transparent lg:bg-gradient-to-t lg:from-black/70 lg:via-black/20 lg:to-transparent" />
+                        {/* Badges */}
+                        <div className="absolute top-5 left-5 flex flex-wrap gap-2">
+                          <span className="rounded-full bg-gold px-3 py-1 text-xs font-bold text-charcoal tracking-wide">NEW LAUNCH</span>
+                          <span className="rounded-full bg-white/15 backdrop-blur-sm border border-white/30 px-3 py-1 text-xs font-semibold text-white">RERA APPROVED</span>
+                        </div>
+                        {/* Price overlay */}
+                        <div className="absolute bottom-5 left-5">
+                          <p className="text-xs font-medium text-white/70 uppercase tracking-wider">Starting from</p>
+                          <p className="text-3xl font-bold text-gold leading-tight">₹99 Lakhs++</p>
+                          <p className="text-xs text-white/60 mt-0.5">All Inclusive · Possession July 2029</p>
+                        </div>
+                      </Link>
+
+                      {/* Content Side */}
+                      <div className="flex flex-col justify-between p-8 lg:p-10 overflow-y-auto max-h-[600px]">
+                        <div>
+                          <span className="inline-block rounded-full bg-gold/10 border border-gold/30 px-3 py-1 text-xs font-semibold text-gold uppercase tracking-widest mb-4">
+                            2 BHK Premium Residences
+                          </span>
+                          <h3 className="text-3xl font-bold text-foreground leading-tight hover:text-gold transition-colors">
+                            <Link href="/properties/rutu-city-2bhk">
+                              Rutu City
+                            </Link>
+                          </h3>
+                          <p className="mt-3 text-muted-foreground leading-relaxed">
+                            Experience premium living at <span className="text-foreground font-semibold">Rutu City</span> with iconic 42-storey hillside towers, landscaped podiums, and a wide array of lifestyle amenities.
+                          </p>
+
+                          {/* Key Details Row */}
+                          <div className="mt-5 grid grid-cols-2 gap-3">
+                            <div className="flex items-center gap-2 rounded-lg bg-muted px-3 py-2">
+                              <MapPin className="h-4 w-4 text-gold shrink-0" />
+                              <span className="text-xs font-medium text-foreground">Behind D-Mart, Anand Nagar, G.B. Road, Thane (W)</span>
+                            </div>
+                            <div className="flex items-center gap-2 rounded-lg bg-muted px-3 py-2">
+                              <CalendarDays className="h-4 w-4 text-gold shrink-0" />
+                              <span className="text-xs font-medium text-foreground">Possession: July 2029</span>
+                            </div>
+                          </div>
+
+                          {/* Configurations */}
+                          <div className="mt-5 space-y-2">
+                            <p className="text-xs text-muted-foreground uppercase tracking-wider font-semibold mb-2">Available Configurations</p>
+                            {rutuNewConfigs.map((cfg, i) => (
+                              <div key={i} className="flex items-center justify-between rounded-lg border border-border bg-background px-4 py-3">
+                                <div>
+                                  <p className="text-sm font-bold text-foreground">{cfg.area}</p>
+                                  <p className="text-xs text-muted-foreground">{cfg.label}</p>
+                                </div>
+                                <div className="text-right">
+                                  <p className="text-sm font-bold text-gold">{cfg.price}</p>
+                                  <p className="text-xs text-muted-foreground">{cfg.note}</p>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+
+                          {/* Jodi Option Note */}
+                          <div className="mt-3 rounded-lg border border-gold/25 bg-gold/5 px-4 py-3 flex items-start gap-2">
+                            <span className="text-sm">✨</span>
+                            <div>
+                              <p className="text-xs font-bold text-gold uppercase tracking-wider">Jodi Option Available</p>
+                              <p className="text-xs text-foreground/90 mt-0.5">Jodi Flat also available — 2+2, 1500 Sq.Ft. Carpet Area — ₹2.60 Cr All Inclusive</p>
+                            </div>
+                          </div>
+
+                          {/* Highlights */}
+                          <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-4">
+                            {rutuNewHighlights.map((point) => (
+                              <div key={point} className="flex items-start gap-2">
+                                <CheckCircle2 className="h-4 w-4 text-gold mt-0.5 shrink-0" />
+                                <span className="text-sm text-foreground/80">{point}</span>
+                              </div>
+                            ))}
+                          </div>
+
+                          {/* Payment plans chips */}
+                          <div className="mt-5">
+                            <p className="text-xs text-muted-foreground uppercase tracking-wider font-semibold mb-2">Payment Plans</p>
+                            <div className="flex flex-wrap gap-2">
+                              {rutuNewPaymentPlans.map((plan) => (
+                                <span key={plan} className="rounded-full bg-muted border border-border px-3 py-1 text-xs font-medium text-foreground/80">{plan}</span>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* CTAs */}
+                        <div className="mt-8 flex flex-col sm:flex-row gap-3">
+                          <Button
+                            onClick={scrollToForm}
+                            className="flex-1 bg-gold text-charcoal hover:bg-gold/90 font-semibold text-sm h-11 gap-2"
+                          >
+                            Schedule Site Visit
+                            <ArrowRight className="h-4 w-4" />
+                          </Button>
+                          <Button
+                            asChild
+                            variant="outline"
+                            className="flex-1 border-gold/50 text-gold hover:bg-gold/10 font-semibold text-sm h-11"
+                          >
+                            <Link href="/properties/rutu-city-2bhk">
                               View Details
                             </Link>
                           </Button>
