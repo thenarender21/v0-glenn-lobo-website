@@ -100,7 +100,7 @@ export function ContactModal({ open, onOpenChange, source = "Website popup", con
       }, 1500)
     } catch (error: any) {
       console.error("Error submitting form:", error)
-      setSubmitError(`Submission failed (${error.message}). Please try again, or contact us via WhatsApp or Call.`)
+      setSubmitError("We couldn't submit your inquiry. Please try again, or contact us directly on WhatsApp or Call.")
     } finally {
       setIsSubmitting(false)
     }
