@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, ReactNode } from "react"
 import { useRouter } from "next/navigation"
-import { trackFormSubmit } from "@/lib/navigation-helpers"
+import { trackFormSubmit, trackWhatsAppClick, trackCallClick } from "@/lib/navigation-helpers"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
@@ -48,6 +48,7 @@ export function FloatingCtaProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
 
   const {
     register,
@@ -70,12 +71,14 @@ export function FloatingCtaProvider({ children }: { children: ReactNode }) {
     setIsOpen(false)
     setTimeout(() => {
       setIsSuccess(false)
+      setSubmitError(null)
       reset()
     }, 500) // Reset after animation
   }
 
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true)
+    setSubmitError(null)
     
     try {
       const response = await fetch("/api/contact", {
@@ -112,6 +115,7 @@ export function FloatingCtaProvider({ children }: { children: ReactNode }) {
       }, 1500)
     } catch (error) {
       console.error("Error submitting form:", error)
+      setSubmitError("We couldn't schedule your site visit. Please try again, or connect with us directly.")
     } finally {
       setIsSubmitting(false)
     }
@@ -226,6 +230,32 @@ export function FloatingCtaProvider({ children }: { children: ReactNode }) {
                         </Select>
                         {errors.budget && <p className="text-sm text-destructive">{errors.budget.message}</p>}
                       </div>
+
+                      {submitError && (
+                        <div className="rounded-lg bg-destructive/10 p-3 text-sm text-destructive border border-destructive/20 space-y-2">
+                          <p>{submitError}</p>
+                          <div className="flex gap-2">
+                            <Button
+                              type="button"
+                              variant="outline"
+                              size="sm"
+                              className="border-green-500 bg-green-500/10 text-green-600 hover:bg-green-500 hover:text-white text-xs font-normal"
+                              onClick={() => trackWhatsAppClick(router, "https://wa.me/917972781688", "Floating CTA Fallback")}
+                            >
+                              Chat on WhatsApp
+                            </Button>
+                            <Button
+                              type="button"
+                              variant="outline"
+                              size="sm"
+                              className="border-primary bg-primary/10 text-primary hover:bg-primary hover:text-white text-xs font-normal"
+                              onClick={() => trackCallClick(router, "Floating CTA Fallback")}
+                            >
+                              Call Us
+                            </Button>
+                          </div>
+                        </div>
+                      )}
 
                       <Button
                         type="submit"

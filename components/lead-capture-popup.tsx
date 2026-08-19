@@ -20,7 +20,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { CheckCircle2, Loader2, Home } from "lucide-react"
-import { trackFormSubmit } from "@/lib/navigation-helpers"
+import { trackFormSubmit, trackWhatsAppClick, trackCallClick } from "@/lib/navigation-helpers"
 
 const locations = [
   "Ghodbunder Road, Thane",
@@ -38,6 +38,7 @@ export function LeadCapturePopup() {
   const [isOpen, setIsOpen] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
 
   const [formData, setFormData] = useState({
     name: "",
@@ -61,12 +62,14 @@ export function LeadCapturePopup() {
 
   const handleClose = () => {
     setIsOpen(false)
+    setSubmitError(null)
     sessionStorage.setItem("lead-capture-shown", "true")
   }
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setSubmitError(null)
     
     try {
       const response = await fetch("/api/contact", {
@@ -101,6 +104,7 @@ export function LeadCapturePopup() {
       }, 1500)
     } catch (error) {
       console.error("Popup submission error:", error)
+      setSubmitError("We couldn't submit your details. Please try again, or connect with us directly.")
     } finally {
       setIsSubmitting(false)
     }
@@ -197,6 +201,32 @@ export function LeadCapturePopup() {
                     </SelectContent>
                   </Select>
                 </div>
+
+                {submitError && (
+                  <div className="rounded-lg bg-destructive/10 p-3 text-sm text-destructive border border-destructive/20 space-y-2">
+                    <p>{submitError}</p>
+                    <div className="flex gap-2">
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        className="border-green-500 bg-green-500/10 text-green-600 hover:bg-green-500 hover:text-white text-xs font-normal"
+                        onClick={() => trackWhatsAppClick(router, "https://wa.me/917972781688", "Popup Fallback")}
+                      >
+                        Chat on WhatsApp
+                      </Button>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        className="border-primary bg-primary/10 text-primary hover:bg-primary hover:text-white text-xs font-normal"
+                        onClick={() => trackCallClick(router, "Popup Fallback")}
+                      >
+                        Call Us
+                      </Button>
+                    </div>
+                  </div>
+                )}
 
                 <Button
                   type="submit"

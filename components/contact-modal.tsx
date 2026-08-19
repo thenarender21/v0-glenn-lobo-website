@@ -25,7 +25,7 @@ import {
 import { contactFormSchema, ContactFormData } from "@/lib/form-schema"
 import { useProperties } from "@/components/properties-provider"
 import { CheckCircle2, Loader2 } from "lucide-react"
-import { trackFormSubmit, ConversionType } from "@/lib/navigation-helpers"
+import { trackFormSubmit, trackWhatsAppClick, trackCallClick, ConversionType } from "@/lib/navigation-helpers"
 
 interface ContactModalProps {
   open: boolean
@@ -39,6 +39,7 @@ export function ContactModal({ open, onOpenChange, source = "Website popup", con
   const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
 
   const {
     register,
@@ -59,6 +60,7 @@ export function ContactModal({ open, onOpenChange, source = "Website popup", con
 
   const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true)
+    setSubmitError(null)
     
     try {
       const response = await fetch("/api/contact", {
@@ -97,6 +99,7 @@ export function ContactModal({ open, onOpenChange, source = "Website popup", con
       }, 1500)
     } catch (error) {
       console.error("Error submitting form:", error)
+      setSubmitError("We couldn't submit your inquiry. Please try again, or contact us directly on WhatsApp or Call.")
     } finally {
       setIsSubmitting(false)
     }
@@ -107,6 +110,7 @@ export function ContactModal({ open, onOpenChange, source = "Website popup", con
       onOpenChange(open)
       if (!open) {
         setIsSuccess(false)
+        setSubmitError(null)
         reset()
       }
     }
@@ -216,6 +220,32 @@ export function ContactModal({ open, onOpenChange, source = "Website popup", con
                   </p>
                 )}
               </div>
+
+              {submitError && (
+                <div className="rounded-lg bg-destructive/10 p-3 text-sm text-destructive border border-destructive/20 space-y-2">
+                  <p>{submitError}</p>
+                  <div className="flex gap-2">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      className="border-green-500 bg-green-500/10 text-green-600 hover:bg-green-500 hover:text-white text-xs font-normal"
+                      onClick={() => trackWhatsAppClick(router, "https://wa.me/917972781688", "Contact Modal Fallback")}
+                    >
+                      Chat on WhatsApp
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      className="border-primary bg-primary/10 text-primary hover:bg-primary hover:text-white text-xs font-normal"
+                      onClick={() => trackCallClick(router, "Contact Modal Fallback")}
+                    >
+                      Call Us
+                    </Button>
+                  </div>
+                </div>
+              )}
 
               <Button
                 type="submit"

@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { CheckCircle2, Loader2, MessageCircle } from "lucide-react"
-import { trackWhatsAppClick, trackFormSubmit } from "@/lib/navigation-helpers"
+import { trackWhatsAppClick, trackFormSubmit, trackCallClick } from "@/lib/navigation-helpers"
 
 const finalFormSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -25,6 +25,7 @@ export function FinalCtaSection() {
   const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
 
   const {
     register,
@@ -42,6 +43,7 @@ export function FinalCtaSection() {
 
   const onSubmit = async (data: FinalFormData) => {
     setIsSubmitting(true)
+    setSubmitError(null)
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
@@ -78,6 +80,7 @@ export function FinalCtaSection() {
       }, 1500)
     } catch (error) {
       console.error("Error submitting final cta form:", error)
+      setSubmitError("We couldn't submit your details. Please try again, or connect with us directly.")
     } finally {
       setIsSubmitting(false)
     }
@@ -183,6 +186,32 @@ export function FinalCtaSection() {
                       <p className="text-sm text-destructive">{errors.email.message}</p>
                     )}
                   </div>
+
+                  {submitError && (
+                    <div className="rounded-lg bg-destructive/10 p-3 text-sm text-destructive border border-destructive/20 space-y-2">
+                      <p>{submitError}</p>
+                      <div className="flex gap-2">
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          className="border-green-500 bg-green-500/10 text-green-600 hover:bg-green-500 hover:text-white text-xs font-normal"
+                          onClick={() => trackWhatsAppClick(router, "https://wa.me/917972781688", "2 BHK Final CTA Fallback")}
+                        >
+                          Chat on WhatsApp
+                        </Button>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          className="border-primary bg-primary/10 text-primary hover:bg-primary hover:text-white text-xs font-normal"
+                          onClick={() => trackCallClick(router, "2 BHK Final CTA Fallback")}
+                        >
+                          Call Us
+                        </Button>
+                      </div>
+                    </div>
+                  )}
 
                   <Button
                     type="submit"

@@ -16,7 +16,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { CheckCircle2, Loader2, MessageCircle } from "lucide-react"
-import { trackWhatsAppClick, trackFormSubmit } from "@/lib/navigation-helpers"
+import { trackWhatsAppClick, trackFormSubmit, trackCallClick } from "@/lib/navigation-helpers"
 
 const landingFormSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -29,6 +29,7 @@ export function LeadCaptureSection() {
   const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
 
   const {
     register,
@@ -45,6 +46,7 @@ export function LeadCaptureSection() {
 
   const onSubmit = async (data: LandingFormData) => {
     setIsSubmitting(true)
+    setSubmitError(null)
     
     try {
       const response = await fetch("/api/contact", {
@@ -82,6 +84,7 @@ export function LeadCaptureSection() {
       }, 1500)
     } catch (error) {
       console.error("Error submitting form:", error)
+      setSubmitError("We couldn't submit your details. Please try again, or connect with us directly.")
     } finally {
       setIsSubmitting(false)
     }
@@ -171,6 +174,32 @@ export function LeadCaptureSection() {
                       <p className="text-sm text-destructive">{errors.phone.message}</p>
                     )}
                   </div>
+
+                  {submitError && (
+                    <div className="rounded-lg bg-destructive/10 p-3 text-sm text-destructive border border-destructive/20 space-y-2">
+                      <p>{submitError}</p>
+                      <div className="flex gap-2">
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          className="border-green-500 bg-green-500/10 text-green-600 hover:bg-green-500 hover:text-white text-xs font-normal"
+                          onClick={() => trackWhatsAppClick(router, "https://wa.me/917972781688", "Lead Capture Fallback")}
+                        >
+                          Chat on WhatsApp
+                        </Button>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          className="border-primary bg-primary/10 text-primary hover:bg-primary hover:text-white text-xs font-normal"
+                          onClick={() => trackCallClick(router, "Lead Capture Fallback")}
+                        >
+                          Call Us
+                        </Button>
+                      </div>
+                    </div>
+                  )}
 
                   <Button
                     type="submit"

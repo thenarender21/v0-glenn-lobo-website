@@ -150,8 +150,8 @@ export default function PropertyDetailPage() {
       }, 1000)
     } catch (error) {
       toast({
-        title: "Error",
-        description: "Failed to send enquiry. Please try again.",
+        title: "Enquiry Failed",
+        description: "We couldn't submit your details. Please Call (07972781688) or Chat with us on WhatsApp (+91 79727 81688) instead.",
         variant: "destructive"
       })
       console.error("Property enquiry submission error:", error)

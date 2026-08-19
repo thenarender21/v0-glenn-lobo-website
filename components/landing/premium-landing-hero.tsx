@@ -32,6 +32,7 @@ export function PremiumLandingHero() {
   const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
 
   const {
     register,
@@ -52,6 +53,7 @@ export function PremiumLandingHero() {
 
   const onSubmit = async (data: HeroFormData) => {
     setIsSubmitting(true)
+    setSubmitError(null)
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
@@ -88,6 +90,7 @@ export function PremiumLandingHero() {
       }, 1500)
     } catch (error) {
       console.error("Error submitting hero form:", error)
+      setSubmitError("We couldn't submit your details. Please try again, or connect with us directly.")
     } finally {
       setIsSubmitting(false)
     }
@@ -230,6 +233,32 @@ export function PremiumLandingHero() {
                       <p className="text-xs text-red-400 mt-1">{errors.phone.message}</p>
                     )}
                   </div>
+
+                  {submitError && (
+                    <div className="rounded-lg bg-destructive/15 p-3 text-sm text-red-300 border border-destructive/20 space-y-2">
+                      <p>{submitError}</p>
+                      <div className="flex gap-2">
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          className="border-green-500 bg-green-500/10 text-green-400 hover:bg-green-500 hover:text-white text-xs font-normal"
+                          onClick={() => trackWhatsAppClick(router, "https://wa.me/917972781688", "Premium Hero Fallback")}
+                        >
+                          Chat on WhatsApp
+                        </Button>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          className="border-white/20 bg-white/5 text-white hover:bg-white hover:text-charcoal text-xs font-normal"
+                          onClick={() => trackCallClick(router, "Premium Hero Fallback")}
+                        >
+                          Call Us
+                        </Button>
+                      </div>
+                    </div>
+                  )}
 
                   <Button
                     type="submit"
