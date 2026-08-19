@@ -25,15 +25,15 @@ export async function POST(request: Request) {
       const enrichedRecords = body.records.map((record: any) => {
         const fields = { ...record.fields };
 
-        // 1. Send as individual columns (requires matching columns in Airtable)
-        if (utmSource) fields["UTM Source"] = utmSource;
-        if (utmMedium) fields["UTM Medium"] = utmMedium;
-        if (utmCampaign) fields["UTM Campaign"] = utmCampaign;
-        if (utmTerm) fields["UTM Term"] = utmTerm;
-        if (utmContent) fields["UTM Content"] = utmContent;
-        if (gclid) fields["GCLID"] = gclid;
-        if (referrer) fields["Referrer"] = referrer;
-        if (landingPage) fields["Landing Page"] = landingPage;
+        // 1. Send as individual columns (disabled to prevent Airtable schema mismatch errors)
+        // if (utmSource) fields["UTM Source"] = utmSource;
+        // if (utmMedium) fields["UTM Medium"] = utmMedium;
+        // if (utmCampaign) fields["UTM Campaign"] = utmCampaign;
+        // if (utmTerm) fields["UTM Term"] = utmTerm;
+        // if (utmContent) fields["UTM Content"] = utmContent;
+        // if (gclid) fields["GCLID"] = gclid;
+        // if (referrer) fields["Referrer"] = referrer;
+        // if (landingPage) fields["Landing Page"] = landingPage;
 
         // 2. Append to Message field as a fail-safe fallback
         const trackingParts = [];
