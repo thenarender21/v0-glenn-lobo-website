@@ -86,7 +86,8 @@ export function ContactModal({ open, onOpenChange, source = "Website popup", con
       });
 
       if (!response.ok) {
-        throw new Error("Failed to submit to Airtable");
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || "Failed to submit to Airtable");
       }
 
       setIsSuccess(true)
@@ -97,9 +98,9 @@ export function ContactModal({ open, onOpenChange, source = "Website popup", con
         trackFormSubmit("lead", "contact_form");
         trackFormSubmit(router, source, conversionType)
       }, 1500)
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error submitting form:", error)
-      setSubmitError("We couldn't submit your inquiry. Please try again, or contact us directly on WhatsApp or Call.")
+      setSubmitError(`Submission failed (${error.message}). Please try again, or contact us via WhatsApp or Call.`)
     } finally {
       setIsSubmitting(false)
     }

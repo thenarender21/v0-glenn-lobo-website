@@ -73,8 +73,8 @@ export async function POST(request: Request) {
 
     const data = await response.json();
     return NextResponse.json(data);
-  } catch (error) {
+  } catch (error: any) {
     console.error("Airtable submission error:", error);
-    return NextResponse.json({ error: "Failed to submit form" }, { status: 500 });
+    return NextResponse.json({ error: error.message || "Failed to submit form" }, { status: 500 });
   }
 }
