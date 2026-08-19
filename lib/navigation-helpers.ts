@@ -65,7 +65,7 @@ export function trackFormSubmit(first: any, second?: any, third?: any): void {
     const conversionType = third || "form";
     pushToDataLayer({ event: "form_submit", conversionType, source });
     if (typeof window !== "undefined") {
-      const url = `/thank-you/${conversionType}`
+      const url = "/thank-you"
       router.push(url)
     }
   } else {

@@ -21,7 +21,6 @@ import { trackWhatsAppClick, trackFormSubmit } from "@/lib/navigation-helpers"
 const landingFormSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   phone: z.string().min(10, "Please enter a valid phone number"),
-  propertyInterest: z.string().min(1, "Please select an apartment type"),
 })
 
 type LandingFormData = z.infer<typeof landingFormSchema>
@@ -34,7 +33,6 @@ export function LeadCaptureSection() {
   const {
     register,
     handleSubmit,
-    setValue,
     reset,
     formState: { errors },
   } = useForm<LandingFormData>({
@@ -42,7 +40,6 @@ export function LeadCaptureSection() {
     defaultValues: {
       name: "",
       phone: "",
-      propertyInterest: "",
     },
   })
 
@@ -62,10 +59,10 @@ export function LeadCaptureSection() {
                 "Name": data.name,
                 "Phone": data.phone,
                 "Email": "Landing Page Lead", // Placeholder since we removed Email field
-                "Property": data.propertyInterest,
+                "Property": "2 BHK Premium",
                 "Lead Source": "Landing Page Ads",
                 "Page URL": window.location.href,
-                "Message": `Interested in ${data.propertyInterest}`
+                "Message": "Interested in 2 BHK Premium Apartments"
               }
             }
           ]
@@ -172,27 +169,6 @@ export function LeadCaptureSection() {
                     />
                     {errors.phone && (
                       <p className="text-sm text-destructive">{errors.phone.message}</p>
-                    )}
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="propertyInterest">Preferred Apartment Type</Label>
-                    <Select
-                      onValueChange={(value) => setValue("propertyInterest", value)}
-                    >
-                      <SelectTrigger className="w-full bg-background h-12">
-                        <SelectValue placeholder="Select an apartment type" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="1BHK Apartment">1BHK Apartment</SelectItem>
-                        <SelectItem value="2BHK Apartment">2BHK Apartment</SelectItem>
-                        <SelectItem value="3BHK Apartment">3BHK Apartment</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    {errors.propertyInterest && (
-                      <p className="text-sm text-destructive">
-                        {errors.propertyInterest.message}
-                      </p>
                     )}
                   </div>
 

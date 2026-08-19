@@ -2,15 +2,16 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X } from "lucide-react"
+import { Menu, X, Phone } from "lucide-react"
 import Link from "next/link"
 import { useScrollDirection } from "@/hooks/use-scroll-direction"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import { PHONE_NUMBER } from "@/lib/navigation-helpers"
 
 interface NavigationProps {
   onOpenContact: () => void
-  variant?: "default" | "solid"
+  variant?: "default" | "solid" | "landing"
 }
 
 const navItems = [
@@ -37,9 +38,13 @@ export function Navigation({ onOpenContact, variant = "default" }: NavigationPro
           "fixed top-0 left-0 right-0 z-50 transition-colors duration-300",
           variant === "solid"
             ? "bg-[#ffffff] border-b border-[#e5e5e5]"
-            : isAtTop
-              ? "bg-transparent"
-              : "bg-background/95 backdrop-blur-md border-b border-border"
+            : variant === "landing"
+              ? isAtTop
+                ? "bg-transparent"
+                : "bg-background/95 backdrop-blur-md border-b border-border"
+              : isAtTop
+                ? "bg-transparent"
+                : "bg-background/95 backdrop-blur-md border-b border-border"
         )}
       >
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
@@ -52,38 +57,53 @@ export function Navigation({ onOpenContact, variant = "default" }: NavigationPro
             </span>
           </Link>
 
-          <div className="hidden md:flex md:items-center md:gap-8">
-            {navItems.map((item) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                className={cn(
-                  "text-sm font-medium transition-colors hover:text-gold",
-                  variant === "solid" ? "text-[#222]" : isAtTop ? "text-white/90 hover:text-white" : "text-foreground/80 hover:text-foreground"
-                )}
-              >
-                {item.label}
-              </Link>
-            ))}
-            <Button
-              onClick={onOpenContact}
-              className="bg-gold text-charcoal hover:bg-gold-light"
+          {variant === "landing" ? (
+            <a
+              href={`tel:${PHONE_NUMBER}`}
+              className={cn(
+                "text-sm font-semibold flex items-center gap-2 hover:text-gold transition-colors",
+                isAtTop ? "text-white" : "text-foreground"
+              )}
             >
-              Book Consultation
-            </Button>
-          </div>
+              <Phone className="size-4 text-gold" />
+              <span>+91 7972781688</span>
+            </a>
+          ) : (
+            <>
+              <div className="hidden md:flex md:items-center md:gap-8">
+                {navItems.map((item) => (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    className={cn(
+                      "text-sm font-medium transition-colors hover:text-gold",
+                      variant === "solid" ? "text-[#222]" : isAtTop ? "text-white/90 hover:text-white" : "text-foreground/80 hover:text-foreground"
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+                <Button
+                  onClick={onOpenContact}
+                  className="bg-gold text-charcoal hover:bg-gold-light"
+                >
+                  Book Consultation
+                </Button>
+              </div>
 
-          <button
-            type="button"
-            className={cn(
-              "md:hidden p-2 -m-2",
-              variant === "solid" ? "text-[#111]" : isAtTop ? "text-white" : "text-foreground"
-            )}
-            onClick={() => setMobileMenuOpen(true)}
-          >
-            <Menu className="size-6" />
-            <span className="sr-only">Open menu</span>
-          </button>
+              <button
+                type="button"
+                className={cn(
+                  "md:hidden p-2 -m-2",
+                  variant === "solid" ? "text-[#111]" : isAtTop ? "text-white" : "text-foreground"
+                )}
+                onClick={() => setMobileMenuOpen(true)}
+              >
+                <Menu className="size-6" />
+                <span className="sr-only">Open menu</span>
+              </button>
+            </>
+          )}
         </nav>
       </motion.header>
 

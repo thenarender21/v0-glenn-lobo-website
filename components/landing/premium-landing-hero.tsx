@@ -24,12 +24,11 @@ const heroFormSchema = z.object({
   phone: z.string()
     .min(10, "Please enter a valid phone number")
     .regex(/^\d+$/, "Phone number must contain only digits"),
-  bhk: z.string().min(1, "Please select preferred BHK"),
 })
 
 type HeroFormData = z.infer<typeof heroFormSchema>
 
-export function PremiumLandingHero({ onOpenContact }: { onOpenContact?: () => void }) {
+export function PremiumLandingHero() {
   const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
@@ -37,7 +36,6 @@ export function PremiumLandingHero({ onOpenContact }: { onOpenContact?: () => vo
   const {
     register,
     handleSubmit,
-    setValue,
     reset,
     formState: { errors },
   } = useForm<HeroFormData>({
@@ -45,9 +43,12 @@ export function PremiumLandingHero({ onOpenContact }: { onOpenContact?: () => vo
     defaultValues: {
       name: "",
       phone: "",
-      bhk: "",
     },
   })
+
+  const scrollToForm = () => {
+    document.getElementById("lead-form")?.scrollIntoView({ behavior: "smooth" })
+  }
 
   const onSubmit = async (data: HeroFormData) => {
     setIsSubmitting(true)
@@ -64,10 +65,10 @@ export function PremiumLandingHero({ onOpenContact }: { onOpenContact?: () => vo
                 "Name": data.name,
                 "Phone": data.phone,
                 "Email": "Hero Inline Lead",
-                "Property": `${data.bhk} Preferred`,
+                "Property": "2 BHK Premium",
                 "Lead Source": "Hero Callback Form",
                 "Page URL": window.location.href,
-                "Message": `Callback requested for ${data.bhk}`,
+                "Message": "Callback requested for Premium 2 BHK",
               },
             },
           ],
@@ -130,11 +131,11 @@ export function PremiumLandingHero({ onOpenContact }: { onOpenContact?: () => vo
               </div>
               
               <h1 className="text-balance text-4xl font-light leading-tight text-white sm:text-5xl md:text-6xl">
-                Find Your Dream Home in <span className="font-medium text-gold">Thane</span> — 1 BHK, 2 BHK, 3 BHK & Luxury Apartments
+                Premium <span className="font-medium text-gold">2 BHK Apartments</span> in Thane — Starting ₹93 Lakhs All Inclusive
               </h1>
               
               <p className="mt-6 max-w-2xl text-pretty text-lg text-white/80 sm:text-xl leading-relaxed">
-                Trusted real estate advisor with 13+ years in Thane. Explore verified projects by Raunak and Lodha — starting ₹67 Lakhs.
+                Verified projects by Raunak & Lodha on Ghodbunder Road. 13+ years of trusted expertise. Book your free site visit today.
               </p>
             </motion.div>
 
@@ -146,7 +147,7 @@ export function PremiumLandingHero({ onOpenContact }: { onOpenContact?: () => vo
               className="mt-8 flex flex-col sm:flex-row items-center gap-4"
             >
               <Button
-                onClick={onOpenContact}
+                onClick={scrollToForm}
                 size="lg"
                 className="w-full bg-gold px-8 py-6 text-base font-medium text-charcoal hover:bg-gold-light sm:w-auto transition-colors cursor-pointer"
               >
@@ -227,26 +228,6 @@ export function PremiumLandingHero({ onOpenContact }: { onOpenContact?: () => vo
                     />
                     {errors.phone && (
                       <p className="text-xs text-red-400 mt-1">{errors.phone.message}</p>
-                    )}
-                  </div>
-
-                  <div className="space-y-1.5 text-left">
-                    <Label htmlFor="hero-bhk" className="text-white/90 text-sm font-medium">Preferred BHK</Label>
-                    <Select
-                      onValueChange={(value) => setValue("bhk", value)}
-                    >
-                      <SelectTrigger id="hero-bhk" className="w-full bg-charcoal/60 border-white/20 text-white h-11 focus:ring-gold focus:border-gold">
-                        <SelectValue placeholder="Select Preferred BHK" />
-                      </SelectTrigger>
-                      <SelectContent className="bg-charcoal border-white/10 text-white">
-                        <SelectItem value="1 BHK" className="focus:bg-gold focus:text-charcoal cursor-pointer">1 BHK</SelectItem>
-                        <SelectItem value="2 BHK" className="focus:bg-gold focus:text-charcoal cursor-pointer">2 BHK</SelectItem>
-                        <SelectItem value="3 BHK" className="focus:bg-gold focus:text-charcoal cursor-pointer">3 BHK</SelectItem>
-                        <SelectItem value="4 BHK" className="focus:bg-gold focus:text-charcoal cursor-pointer">4 BHK</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    {errors.bhk && (
-                      <p className="text-xs text-red-400 mt-1">{errors.bhk.message}</p>
                     )}
                   </div>
 

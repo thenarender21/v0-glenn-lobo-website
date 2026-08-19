@@ -3,7 +3,6 @@ import { Geist, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import Script from 'next/script'
-import { LeadCapturePopup } from '@/components/lead-capture-popup'
 import { PropertiesProvider } from '@/components/properties-provider'
 import { UtmTracker } from '@/components/utm-tracker'
 import { getProperties } from '@/lib/properties'
@@ -58,7 +57,6 @@ export default async function RootLayout({
         <PropertiesProvider properties={properties}>
           <UtmTracker />
           {children}
-          <LeadCapturePopup />
         </PropertiesProvider>
         <Analytics />
         <SpeedInsights />
