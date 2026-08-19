@@ -75,6 +75,11 @@ export async function POST(request: Request) {
     return NextResponse.json(data);
   } catch (error: any) {
     console.error("Airtable submission error:", error);
-    return NextResponse.json({ error: error.message || "Failed to submit form" }, { status: 500 });
+    const keyInfo = process.env.AIRTABLE_API_KEY 
+      ? `Key starts with: "${process.env.AIRTABLE_API_KEY.slice(0, 4)}" (length: ${process.env.AIRTABLE_API_KEY.length})`
+      : "Key is undefined";
+    return NextResponse.json({ 
+      error: `${error.message || "Failed to submit form"} [Debug: ${keyInfo}]` 
+    }, { status: 500 });
   }
 }
