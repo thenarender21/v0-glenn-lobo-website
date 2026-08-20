@@ -379,6 +379,8 @@ function mapDbProperty(dbProp: any): Property {
 }
 
 export async function getProperties(): Promise<Property[]> {
+  let list: Property[] = [];
+  
   try {
     const dbProps = await prisma.property.findMany({
       orderBy: { createdAt: 'desc' }
@@ -386,26 +388,26 @@ export async function getProperties(): Promise<Property[]> {
 
     if (dbProps.length > 0) {
       // Map DB schema to frontend structure. Use 'slug' as the public ID so links match slugs
-      return dbProps.map(dbProp => ({
+      list = dbProps.map(dbProp => ({
         ...mapDbProperty(dbProp),
         id: dbProp.slug // Ensure dynamic pages match using /properties/[slug]
       }));
+    } else {
+      const fetchedProperties = await fetchPropertiesFromSheet();
+      list = (fetchedProperties && fetchedProperties.length > 0) 
+        ? fetchedProperties 
+        : fallbackProperties;
     }
   } catch (error) {
     console.error("Failed to fetch database properties, falling back to static lists", error);
-  }
-
-  let list: Property[] = []
-  try {
-     const fetchedProperties = await fetchPropertiesFromSheet();
-     if (fetchedProperties && fetchedProperties.length > 0) {
-        list = fetchedProperties;
-     } else {
-        list = fallbackProperties;
-     }
-  } catch(e) {
-    console.error("Failed to fetch sheet properties, falling back to mock data", e)
-    list = fallbackProperties;
+    try {
+      const fetchedProperties = await fetchPropertiesFromSheet();
+      list = (fetchedProperties && fetchedProperties.length > 0) 
+        ? fetchedProperties 
+        : fallbackProperties;
+    } catch(e) {
+      list = fallbackProperties;
+    }
   }
 
   // Combine and deduplicate list ensuring premium ones are at the front

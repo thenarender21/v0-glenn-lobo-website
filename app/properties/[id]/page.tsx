@@ -196,7 +196,7 @@ export default function PropertyDetailPage() {
                       className="absolute inset-0"
                     >
                       <Image
-                        src={property.gallery ? property.gallery[activeImageIndex] : property.image}
+                        src={property.gallery && property.gallery.length > 0 ? property.gallery[activeImageIndex] : property.image}
                         alt={`${property.title} view ${activeImageIndex + 1}`}
                         fill
                         priority
