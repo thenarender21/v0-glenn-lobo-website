@@ -8,19 +8,12 @@ import * as z from "zod"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
 import { CheckCircle2, Loader2, MessageCircle } from "lucide-react"
 import { trackWhatsAppClick, trackFormSubmit, trackCallClick } from "@/lib/navigation-helpers"
 
 const landingFormSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
-  phone: z.string().min(10, "Please enter a valid phone number"),
+  phone: z.string().regex(/^[6-9]\d{9}$/, "Please enter a valid 10-digit Indian mobile number"),
 })
 
 type LandingFormData = z.infer<typeof landingFormSchema>
@@ -60,7 +53,7 @@ export function LeadCaptureSection() {
               fields: {
                 "Name": data.name,
                 "Phone": data.phone,
-                "Email": "Landing Page Lead", // Placeholder since we removed Email field
+                "Email": "Landing Page Lead",
                 "Property": "2 BHK Premium",
                 "Lead Source": "Landing Page Ads",
                 "Page URL": window.location.href,
@@ -79,7 +72,7 @@ export function LeadCaptureSection() {
       setTimeout(() => {
         setIsSuccess(false)
         reset()
-        trackFormSubmit("lead", "contact_form");
+        // This will trigger lead_form_submit event and redirect to /thank-you
         trackFormSubmit(router, "Landing Page Ads", "site-visit")
       }, 1500)
     } catch (error) {
@@ -90,8 +83,10 @@ export function LeadCaptureSection() {
     }
   }
 
+  const whatsappUrl = "https://wa.me/917972781688?text=Hi,%20I'm%20interested%20in%202%20BHK%20apartments%20in%20Thane"
+
   return (
-    <section id="lead-form" className="bg-background py-24">
+    <section id="lead-form" className="bg-background py-20">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-5xl overflow-hidden rounded-3xl border border-border bg-card shadow-lg">
           <div className="grid lg:grid-cols-5">
@@ -106,8 +101,8 @@ export function LeadCaptureSection() {
                 <Button
                   variant="outline"
                   size="lg"
-                  className="w-full border-green-500 bg-green-500/10 text-green-400 hover:bg-green-500 hover:text-white"
-                  onClick={() => trackWhatsAppClick(router, "https://wa.me/917972781688", "Landing Page WhatsApp")}
+                  className="w-full border-green-500 bg-green-500/10 text-green-400 hover:bg-green-500 hover:text-white cursor-pointer"
+                  onClick={() => trackWhatsAppClick(router, whatsappUrl, "Landing Page WhatsApp")}
                 >
                   <MessageCircle className="mr-2 size-5" />
                   Chat on WhatsApp
@@ -165,7 +160,7 @@ export function LeadCaptureSection() {
                     <Input
                       id="phone"
                       type="tel"
-                      placeholder="e.g. +91 9876543210"
+                      placeholder="e.g. 9876543210"
                       {...register("phone")}
                       aria-invalid={errors.phone ? "true" : "false"}
                       className="bg-background h-12"
@@ -184,7 +179,7 @@ export function LeadCaptureSection() {
                           variant="outline"
                           size="sm"
                           className="border-green-500 bg-green-500/10 text-green-600 hover:bg-green-500 hover:text-white text-xs font-normal"
-                          onClick={() => trackWhatsAppClick(router, "https://wa.me/917972781688", "Lead Capture Fallback")}
+                          onClick={() => trackWhatsAppClick(router, whatsappUrl, "Lead Capture Fallback")}
                         >
                           Chat on WhatsApp
                         </Button>
@@ -203,7 +198,7 @@ export function LeadCaptureSection() {
 
                   <Button
                     type="submit"
-                    className="w-full bg-gold hover:bg-gold-light text-charcoal h-14 text-lg font-medium mt-4"
+                    className="w-full bg-gold hover:bg-gold-light text-charcoal h-14 text-lg font-medium mt-4 cursor-pointer"
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? (
@@ -212,9 +207,13 @@ export function LeadCaptureSection() {
                         Submitting...
                       </>
                     ) : (
-                      "Get Available Properties"
+                      "Get Free Callback"
                     )}
                   </Button>
+                  
+                  <p className="text-center text-xs text-muted-foreground mt-4 leading-normal">
+                    ⚡ Our team calls within 10 minutes · No spam · 100% Free
+                  </p>
                 </form>
               )}
             </div>

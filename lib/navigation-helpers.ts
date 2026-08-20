@@ -58,6 +58,7 @@ export type ConversionType = "form" | "whatsapp" | "call" | "site-visit" | "pric
 export function trackFormSubmit(conversionType: string, source: string): void;
 export function trackFormSubmit(router: any, source?: string, conversionType?: ConversionType): void;
 export function trackFormSubmit(first: any, second?: any, third?: any): void {
+  pushToDataLayer({ event: "lead_form_submit" });
   if (first && typeof first === "object" && typeof first.push === "function") {
     // Old signature: trackFormSubmit(router, source, conversionType)
     const router = first;

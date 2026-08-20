@@ -78,13 +78,16 @@ export function AgentSection({ onOpenContact }: AgentSectionProps) {
               ))}
             </div>
 
-            <Button
-              onClick={onOpenContact}
-              size="lg"
-              className="mt-8 bg-gold text-charcoal hover:bg-gold-light"
-            >
-              Schedule a Meeting
-            </Button>
+            <div className="mt-8">
+              <a
+                href="https://wa.me/917972781688?text=Hi,%20I'm%20interested%20in%202%20BHK%20apartments%20in%20Thane"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-gold hover:text-gold-light hover:underline font-semibold text-base transition-colors"
+              >
+                Chat on WhatsApp with Advisor &rarr;
+              </a>
+            </div>
           </motion.div>
         </div>
       </div>

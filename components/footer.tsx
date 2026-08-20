@@ -110,13 +110,13 @@ export function Footer({ onOpenContact }: FooterProps) {
           </p>
           <div className="flex gap-6">
             <a
-              href="#"
+              href="/privacy-policy"
               className="text-sm text-muted-foreground transition-colors hover:text-foreground"
             >
               Privacy Policy
             </a>
             <a
-              href="#"
+              href="/terms"
               className="text-sm text-muted-foreground transition-colors hover:text-foreground"
             >
               Terms of Service

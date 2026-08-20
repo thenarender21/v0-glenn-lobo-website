@@ -190,40 +190,6 @@ export const premiumApartmentProperties: Property[] = [
     ]
   },
   {
-    id: "raunak-max-city-2bhk",
-    title: "Raunak Maximum City – Luxury 2 BHK XL Smart Home",
-    type: "2 BHK",
-    status: "Sell",
-    price: "₹93 Lakhs",
-    location: "Ghodbunder Road, Thane",
-    image: "/images/raunak-max-city-2bhk/image_1.webp",
-    description: "Experience spacious living at Raunak Maximum City with premium 2 BHK XL smart homes, nature-inspired lifestyle spaces, and world-class township amenities. Part of a 22-acre modern integrated township, these homes feature spacious bedroom layouts, high-end Jio Fiber powered home automation, and stunning views of the surrounding landscape. The project features a 4-level podium, stilt parking, and 35-storey residential towers designed for maximum efficiency.",
-    beds: 2,
-    baths: 2,
-    sqft: 610,
-    floor: 18,
-    age: "Under Construction",
-    gallery: [
-      "/images/raunak-max-city-2bhk/image_7.webp",
-      "/images/raunak-max-city-2bhk/image_1.webp",
-      "/images/raunak-max-city-2bhk/image_3.webp",
-      "/images/raunak-max-city-2bhk/image_4.webp",
-      "/images/raunak-max-city-2bhk/image_5.webp",
-      "/images/raunak-max-city-2bhk/image_6.webp"
-    ],
-    amenities: [
-      "Gymnasium",
-      "Swimming Pool",
-      "Covered Parking",
-      "24/7 Security",
-      "Power Backup",
-      "Clubhouse",
-      "Children's Play Area",
-      "Lift",
-      "Intercom"
-    ]
-  },
-  {
     id: "rutu-city-2bhk",
     title: "Rutu City – Premium 2 BHK Hillside Residences",
     type: "2 BHK",
@@ -253,6 +219,102 @@ export const premiumApartmentProperties: Property[] = [
       "/images/rutu-city-2bhk/image_13.webp",
       "/images/rutu-city-2bhk/image_14.webp",
       "/images/rutu-city-2bhk/image_15.webp"
+    ],
+    amenities: [
+      "Gymnasium",
+      "Swimming Pool",
+      "Covered Parking",
+      "24/7 Security",
+      "Power Backup",
+      "Clubhouse",
+      "Children's Play Area",
+      "Lift",
+      "Intercom"
+    ]
+  },
+  {
+    id: "tathastu-thane",
+    title: "Tathastu Thane (Daffodil Tower)",
+    type: "2 BHK",
+    status: "Sell",
+    price: "₹79.99 Lakhs++",
+    location: "Ghodbunder Road, Thane",
+    image: "/images/evening_view.webp",
+    description: "Tathastu Thane by Daffodil Tower offers 2 BHK hillside residences located on Ghodbunder Road, Thane. The project boasts high-speed elevators, multi-level security, ample car parking, a lavish clubhouse, and more than 50 lifestyle amenities, providing a perfect blend of comfort and convenience in a Vastu-compliant development.",
+    beds: 2,
+    baths: 2,
+    sqft: 558,
+    floor: 12,
+    age: "Under Construction",
+    gallery: [
+      "/images/evening_view.webp",
+      "/images/Club_house.webp",
+      "/images/Night_cam.webp",
+      "/images/Swimming_pool_02.webp"
+    ],
+    amenities: [
+      "Gymnasium",
+      "Swimming Pool",
+      "Covered Parking",
+      "24/7 Security",
+      "Power Backup",
+      "Clubhouse",
+      "Children's Play Area"
+    ]
+  },
+  {
+    id: "rutu-city-richland",
+    title: "Rutu City – Tower Richland",
+    type: "2 BHK",
+    status: "Sell",
+    price: "₹1.15 Cr++",
+    location: "Ghodbunder Road, Thane",
+    image: "/images/rutu-city/image_1.webp",
+    description: "Rutu City – Tower Richland offers spacious 2 BHK hillside apartments in a 14-acre green township. Every apartment features a private deck with panoramic nature views. The project includes two iconic G+41 storey towers built by the premium developer Rutu Group.",
+    beds: 2,
+    baths: 2,
+    sqft: 745,
+    floor: 15,
+    age: "Under Construction",
+    gallery: [
+      "/images/rutu-city/image_1.webp",
+      "/images/rutu-city/image_2.webp",
+      "/images/rutu-city/image_3.webp",
+      "/images/rutu-city/image_4.webp",
+      "/images/rutu-city/image_5.webp",
+      "/images/rutu-city/image_6.webp"
+    ],
+    amenities: [
+      "Gymnasium",
+      "Swimming Pool",
+      "Covered Parking",
+      "24/7 Security",
+      "Power Backup",
+      "Clubhouse",
+      "Children's Play Area"
+    ]
+  },
+  {
+    id: "raunak-max-city-2bhk",
+    title: "Raunak Maximum City – Luxury 2 BHK XL Smart Home",
+    type: "2 BHK",
+    status: "Sell",
+    price: "₹93 Lakhs++",
+    location: "Ghodbunder Road, Thane",
+    image: "/images/raunak-max-city-2bhk/image_1.webp",
+    description: "Experience spacious living at Raunak Maximum City with premium 2 BHK XL smart homes, nature-inspired lifestyle spaces, and world-class township amenities. Part of a 22-acre modern integrated township, these homes feature spacious bedroom layouts, high-end Jio Fiber powered home automation, and stunning views of the surrounding landscape. The project features a 4-level podium, stilt parking, and 35-storey residential towers designed for maximum efficiency.",
+    beds: 2,
+    baths: 2,
+    sqft: 610,
+    floor: 18,
+    age: "Under Construction",
+    gallery: [
+      "/images/raunak-max-city-2bhk/image_1.webp",
+      "/images/raunak-max-city-2bhk/image_7.webp",
+      "/images/raunak-max-city-2bhk/image_3.webp",
+      "/images/raunak-max-city-2bhk/image_4.webp",
+      "/images/raunak-max-city-2bhk/image_5.webp",
+      "/images/raunak-max-city-2bhk/image_6.webp"
     ],
     amenities: [
       "Gymnasium",
